@@ -109,6 +109,8 @@ while (<IN>) {
 				if ($insert_len > $insert[1] or $insert_len < $insert[0]) {
 					$pe_insert_pass = 0;
 				}
+			} elsif ($line[6] ne "*" and $line[6] ne $line[2]) { ### map to different chromosomes
+				$pe_insert_pass = 0;
 			}
 		### criterion: insert length ###
 
