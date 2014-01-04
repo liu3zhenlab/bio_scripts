@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 # File: samparser.gsnap.pl
-# Author: Sanzhen Liu (modified from Eddy's gsnap2gff3.pl)
+# Author: Sanzhen Liu (refer to Eddy's gsnap2gff3.pl)
 # 2/28/2011 (initial day)
 # 8/31/2011 (updated)
 # 11/11/2013 (updated)
@@ -12,7 +12,6 @@ use FileHandle;
 use Getopt::Long;
 
 use constant CURRENT_VERSION => "0.03beta (2011.6.24)";
-#use constant VERSION => "0.02beta (2011.6.12)";
 use constant DEFAULT_MIN_IDENTICAL => 30;       # Default minimum identical length per read
 use constant DEFAULT_MAX_MISMATCHES => 2;		# Default maximum mismatches per read
 use constant DEFAULT_MAX_TAIL => 3;				# Default maximum tail allowed
@@ -21,7 +20,7 @@ use constant INDEL_PENALTY => 2;				# Default penalty of an INDEL
 use constant DEFAULT_INSERT_MIN => 100;			# Default minimal insert length
 use constant DEFAULT_INSERT_MAX => 600;			# Default maximal insert length
 
-my ($file, @mismatches, @maxtail, @insert, $help, $maxgap, $identical,$maxloci);
+my ($file, @mismatches, @maxtail, @insert, $readlen, $help, $maxgap, $identical,$maxloci);
 my $result = &GetOptions("input|i=s" => \$file,
 					     "identical|e=i" => \$identical,
                          "mismatches|m|mm:i{1,2}" => \@mismatches,
@@ -29,6 +28,7 @@ my $result = &GetOptions("input|i=s" => \$file,
 						 "gap|g=i" => \$maxgap,
 						 "maxloci=i" => \$maxloci,
 						 "insert:i{1,2}" => @insert,
+						 "readlen=i" => \$readlen,
 						 "help|h" => \$help
 );
 
@@ -41,6 +41,9 @@ if ($help) {
 # Assigning default program parameters
 
 # identical length:
+if (!defined $readlen) {
+	$readlen = 110;
+}
 if (!defined $identical) {
 	$identical = DEFAULT_MIN_IDENTICAL;
 }
@@ -69,7 +72,7 @@ if (scalar(@insert)==0) {
 	@insert = (DEFAULT_INSERT_MIN, DEFAULT_INSERT_MAX);
 }
 
-my ($identicalpass, $mmpass, $tailpass, $gappass, $maxloci_pass, $pe_insert_pass, $var_num);
+my ($identicalpass, $hardclipping_pass, $mmpass, $tailpass, $gappass, $maxloci_pass, $pe_insert_pass, $var_num);
 my (%total_read_count, %mapped_read_count, %unmapped_read_count, %confident_mapped_read_count); 
 # open the input sam file:
 open (IN, $file) or die("Cannot open the SAM file $file\n");
@@ -82,14 +85,17 @@ while (<IN>) {
 		$gappass = 0; # to judge gap length
 		$maxloci_pass = 0; # to judge maximum number of read alignment
 		$pe_insert_pass = 1; # to judge the length of insert
-
+		$hardclipping_pass = 1;
 		my @line = split(/\t/,$_);
 		$total_read_count{$line[0]}++;	
 		my $flag = $line[1];
+		my $map_chr = $line[2];
+		my $map_pos = $line[3];
 		# if (!($line[1]==4 or decode($line[1],4))) { # mapped?
 		if (!($flag & 4)) { # mapped
 			$mapped_read_count{$line[0]}++;
 			my $aligncode = $line[5];
+		
 		#*** criterion: gap ***
 			my @gap = split(/N/,$aligncode); # N represents skip region
 			my $gap_len = 0;
@@ -104,12 +110,14 @@ while (<IN>) {
 		### criterion: gap ###
 
 		### criterion: insert length ###
+		### DO NOT allow read paired from different chromosomes
 			my $insert_len = abs($line[8]);
-			if ($line[6] eq "=") {
+			my $pair_sign = $line[6]; ### *,=,or chromosome name if a pair was mapped to different chromosome
+			if ($pair_sign eq "=") {
 				if ($insert_len > $insert[1] or $insert_len < $insert[0]) {
 					$pe_insert_pass = 0;
 				}
-			} elsif ($line[6] ne "*" and $line[6] ne $line[2]) { ### map to different chromosomes
+			} elsif ($pair_sign ne "*" and $pair_sign ne $line[2]) { ### map to different chromosomes
 				$pe_insert_pass = 0;
 			}
 		### criterion: insert length ###
@@ -131,7 +139,24 @@ while (<IN>) {
 					$match_len += $1;
 				}
 			}
-		
+	
+		#*** criterion: hard clipping ***#
+			if ($aligncode =~ /H/) {
+				my $hardclipping_len = 0;
+				my @hardclipping = split(/H/, $aligncode);
+				if ($hardclipping[0] =~ /(\d+)$/) {
+					$hardclipping_len = $1; 
+				}
+				if ($pair_sign eq "=") {
+					my $pair_map_pos = $line[7];
+					my $pair_dist = abs($map_pos - $pair_map_pos) + $hardclipping_len;
+					if (abs($pair_dist - $insert_len) > $readlen) {
+						$hardclipping_pass = 0;
+					}
+				}
+			}
+		### criterion: hard clipping ###
+
 		## criterion: mapped locations:
 			if ($_ =~ /NH\:i\:(\d+)/) {
 				my $mapped_loci = $1;
@@ -182,7 +207,7 @@ while (<IN>) {
 		### criterion: tail ###
 		
 			# output:
-			if ($identicalpass and $gappass and $tailpass and $mmpass and $maxloci_pass and $pe_insert_pass) {
+			if ($hardclipping_pass and $identicalpass and $gappass and $tailpass and $mmpass and $maxloci_pass and $pe_insert_pass) {
 				print "$_\n";
 				$confident_mapped_read_count{$line[0]}++;
 			}
@@ -229,18 +254,20 @@ sub errINF {
 	print <<EOF;
 Usage: perl samparser.pl -i [SAM file] [Options]
 	Options
-	--input|i: SAM file
-	--identical|e: minimum matched and identical base length, default=30bp
-	--mismatches|mm|m: two integers to specify the number of mismatches 
-		out of the number of basepairs of the matched region of reads; 
-		(matched regions are not identical regions, mismatch and indel could occur)
-		e.g., --mm 2 36 represents that <=2 mismatches out of 36 bp
-	--tail: the maximum bp allowed at each side, two integers to specify the number of tails
-		out of the number of basepairs of the reads, not including "N", 
-		e.g., --tail 3 75 represents that <=3 bp tails of 75 bp of reads without "N"
-	--gap: if a read is split, the internal gap (bp) allowed, default=5000bp
-	--maxloci: the maximum mapping locations, default=1;
-	--help: help information
+	--input|i:			SAM file
+	--identical|e:		minimum matched and identical base length, default=30bp
+	--mismatches|mm|m: 	two integers to specify the number of mismatches 
+						out of the number of basepairs of the matched region of reads; 
+						(matched regions are not identical regions, mismatch and indel could occur)
+						e.g., --mm 2 36 represents that <=2 mismatches out of 36 bp
+	--tail:				the maximum bp allowed at each side, two integers to specify the number of tails
+						out of the number of basepairs of the reads, not including "N", 
+						e.g., --tail 3 75 represents that <=3 bp tails of 75 bp of reads without "N"
+	--gap: 				if a read is split, the internal gap (bp) allowed, default=5000bp
+	--maxloci: 			the maximum mapping locations, default=1;
+	--insert:			the range of inserts, default=100 600
+	--readlen:			length of reads, default=110
+	--help: 			help information
 EOF
 	exit;
 }
