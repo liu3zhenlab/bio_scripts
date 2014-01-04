@@ -1,5 +1,5 @@
-scripts
-=======
+perl samparser.gsnap.pl
+=======================
 Sanzhen Liu
 Kansas State University
 12/27/2013
@@ -23,3 +23,11 @@ Usage: perl samparser.gsnap.pl -i [SAM file] [Options]
 	--maxloci: the maximum mapping locations, default=1;
 	--help: help information
 -------------------------------------------------------------------------------------------
+
+update:
+1/3/2014: Add hard clipping parsing criteira to deal with the case that one read was mapped
+	to multiple place and just one of them actually pair with other the paired reads if
+	considering the position
+
+12/27/2013: remove read pairs that were mapped to different chromosomes
+
