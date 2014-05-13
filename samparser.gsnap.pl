@@ -11,7 +11,7 @@ use warnings;
 use FileHandle;
 use Getopt::Long;
 
-use constant CURRENT_VERSION => "0.03beta (2011.6.24)";
+use constant CURRENT_VERSION => "0.03 (2014.1.3)";
 use constant DEFAULT_MIN_IDENTICAL => 30;       # Default minimum identical length per read
 use constant DEFAULT_MAX_MISMATCHES => 2;		# Default maximum mismatches per read
 use constant DEFAULT_MAX_TAIL => 3;				# Default maximum tail allowed
@@ -20,15 +20,17 @@ use constant INDEL_PENALTY => 2;				# Default penalty of an INDEL
 use constant DEFAULT_INSERT_MIN => 100;			# Default minimal insert length
 use constant DEFAULT_INSERT_MAX => 600;			# Default maximal insert length
 
-my ($file, @mismatches, @maxtail, @insert, $readlen, $help, $maxgap, $identical,$maxloci);
+my ($file, @mismatches, @maxtail, @insert, $readlen, $help,
+	$maxgap, $identical, $maxloci, $rmSpliceRead);
 my $result = &GetOptions("input|i=s" => \$file,
 					     "identical|e=i" => \$identical,
                          "mismatches|m|mm:i{1,2}" => \@mismatches,
 						 "tail|t:i{1,2}" => \@maxtail,
 						 "gap|g=i" => \$maxgap,
 						 "maxloci=i" => \$maxloci,
-						 "insert:i{1,2}" => @insert,
+						 "insert:i{1,2}" => \@insert,
 						 "readlen=i" => \$readlen,
+						 "rmSplice" => \$rmSpliceRead,
 						 "help|h" => \$help
 );
 
@@ -67,12 +69,19 @@ if (!defined $maxloci) {
 	$maxloci = 1;
 }
 
+my $allow_splice = "yes";
+if ($rmSpliceRead) {
+	$allow_splice = "no";
+}
+
 ## length range of inserts
 if (scalar(@insert)==0) {
 	@insert = (DEFAULT_INSERT_MIN, DEFAULT_INSERT_MAX);
+} elsif (scalar(@insert)==1) {
+	exit "--insert needs two number to be specified\n";
 }
 
-my ($identicalpass, $hardclipping_pass, $mmpass, $tailpass, $gappass, $maxloci_pass, $pe_insert_pass, $var_num);
+my ($splice_pass, $identicalpass, $hardclipping_pass, $mmpass, $tailpass, $gappass, $maxloci_pass, $pe_insert_pass, $var_num);
 my (%total_read_count, %mapped_read_count, %unmapped_read_count, %confident_mapped_read_count); 
 # open the input sam file:
 open (IN, $file) or die("Cannot open the SAM file $file\n");
@@ -85,7 +94,9 @@ while (<IN>) {
 		$gappass = 0; # to judge gap length
 		$maxloci_pass = 0; # to judge maximum number of read alignment
 		$pe_insert_pass = 1; # to judge the length of insert
-		$hardclipping_pass = 1;
+		$hardclipping_pass = 1; # to judge hard clipping reads
+		$splice_pass = 1; # to judge whether splicing reads are pass
+
 		my @line = split(/\t/,$_);
 		$total_read_count{$line[0]}++;	
 		my $flag = $line[1];
@@ -104,9 +115,15 @@ while (<IN>) {
 					$gap_len += $1;
 				}
 			}
-			if ($gap_len<=$maxgap) {
+			if ($gap_len <= $maxgap) {
 				$gappass = 1;
 			}
+			
+			### if splicing is not allowed and the read contains splicing site, remove it 
+			if ($allow_splice eq "no" and $gap_len>0) {
+				$splice_pass =0;
+			}
+
 		### criterion: gap ###
 
 		### criterion: insert length ###
@@ -185,7 +202,7 @@ while (<IN>) {
 		### criterion: mismatch  ###
 		
 		#*** identical length ***
-			if (($match_len-$var_num)>=$identical) {
+			if (($match_len-$var_num) >= $identical) {
 				$identicalpass = 1;
 			}
 		### criterion: identical ###
@@ -207,7 +224,7 @@ while (<IN>) {
 		### criterion: tail ###
 		
 			# output:
-			if ($hardclipping_pass and $identicalpass and $gappass and $tailpass and $mmpass and $maxloci_pass and $pe_insert_pass) {
+			if ($splice_pass and $hardclipping_pass and $identicalpass and $gappass and $tailpass and $mmpass and $maxloci_pass and $pe_insert_pass) {
 				print "$_\n";
 				$confident_mapped_read_count{$line[0]}++;
 			}
@@ -248,7 +265,8 @@ print STDERR "#INDEL penalty used to calculate mismatched value\t$indel_penalty_
 print STDERR "#maximum length of tail allowed at each side out of matched bases\t@maxtail\n";
 print STDERR "#maximum length of the gap allowed\t$maxgap\n";
 print STDERR "#maximum mapping locations of each read\t$maxloci\n";
-
+print STDERR "#input read length\t$readlen\n";
+print STDERR "#allow splicing reads\t$allow_splice\n";
 
 sub errINF {
 	print <<EOF;
@@ -267,6 +285,7 @@ Usage: perl samparser.pl -i [SAM file] [Options]
 	--maxloci: 			the maximum mapping locations, default=1;
 	--insert:			the range of inserts, default=100 600
 	--readlen:			length of reads, default=110
+	--rmSpice:			remove splicing reads if it is specified, default is not to remove
 	--help: 			help information
 EOF
 	exit;
