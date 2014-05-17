@@ -20,4 +20,6 @@ o 1/3/2014:
 o 12/27/2013: 
 	Remove read pairs that were mapped to different chromosomes
 
+o 5/12/2013
+	Repair a bug - add "\" to @insert at line 31 
 
