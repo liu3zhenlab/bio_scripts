@@ -6,7 +6,7 @@
 #######################################################################################
 ### input, subject to change
 #######################################################################################
-trimmomatic="/home/liu3zhen/packages/Trimmomatic/Trimmomatic-0.32/trimmomatic-0.32.jar"
+trimmomatic="Trimmomatic-0.32/trimmomatic-0.32.jar"
 current_version="trimmomatic-0.32"
 thread_num=16
 in_folder="."
@@ -14,7 +14,7 @@ pair1_feature=".sra_1.fastq"
 pair2_feature=".sra_2.fastq"
 out_folder="./trim"
 mkdir $out_folder
-adaptor_file="/home/liu3zhen/pipelines/trimmomatic/adaptorDB/TruSeq3-PE.fa"
+adaptor_file="TruSeq3-PE.fa"
 log_file_suffix="trimmomatic.log"
 
 ### various parameters
