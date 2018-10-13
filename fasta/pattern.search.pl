@@ -1,8 +1,7 @@
 #!/usr/bin/perl -w
 # Sanzhen Liu
-# 6/4/2014
 # search for any sequencing pattern in fasta sequences
-# version 0.1
+# version 0.1 (6/4/2014)
 
 use strict;
 use warnings;
@@ -12,9 +11,9 @@ use Getopt::Std;
 my %opts = (I=>"", P=>"", O=>"B", h=>0);	
 getopts('I:P:O:h', \%opts);
 die(qq/
-Usage: site.cut.pl [options]
+Usage: pattern.search.pl [options]
 Options:
-	-I str	fasta file[$opts{I}]
+	-I str	fasta file [$opts{I}]
 	-P str  pattern [$opts{P}]
 	-O reverse & complement the sequence to be searched, "F", "R", "B"
 	   representing forward, reverse, both, respectively.
@@ -74,7 +73,7 @@ sub pattern_search {
 	my ($fasta, $fasta_name, $pattern, $ori) = @_;
 	my $count = 0;
 	my $nextpos = 0;
-	while ($fasta =~ /($pattern)/gi) {
+	while ($fasta =~ /(?=($pattern))/gi) { # ?= is to match overlapping matches
 		my $match = $1;
 		my $matchstart = index($fasta, $match, $nextpos);
 		my $matchend = $matchstart + length($match);

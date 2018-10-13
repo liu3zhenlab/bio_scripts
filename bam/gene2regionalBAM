@@ -1,0 +1,108 @@
+#!/bin/bash
+# Sanzhen Liu
+# 10/12/2018
+
+version=0.01
+ext=0; # default value
+feature=bam # default feature of BAM files
+outpath=. # default output directory
+
+gflag=false
+bflag=false
+dflag=false
+
+example_gene=Zm00001d018635
+bedfile=/home/liu3zhen/references/B73refgen4/genemodel/B73Ref4.gene.bed
+alnpath=/data1/home/liu3zhen/newB73Mo17WGS/v4alignment
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+usage () {
+	echo "Script to extract BAM alignments of reads on/around a gene" >&2
+	echo -e "${RED}Dependency${NC}: bedtools and samtools" >&2
+	echo -e "${RED}version${NC}="$version >&2
+	echo -e "${RED}Usage${NC}: $0 -g <gene name> -b <bed> -d <path> [other options]" >&2
+	echo "    -g: a gene name" >&2
+	echo "    -b: bed file including the gene of interest" >&2
+	echo "    -d: directory path including BAM and sorted index files" >&2
+	echo "    -e: bp to be extended from the gene region, default=0" >&2
+	echo "        if -e > 0, -s needs to be specified" >&2
+	echo "    -s: bed file of sizes of chr/contigs" >&2
+	echo "    -f: feature strings for BAM files, default=bam" >&2
+	echo "        feature could specified in a regular expression format" >&2
+	echo "        feature also could be file names separated by |" >&2
+	echo "    -o: output directory; default=." >&2
+	echo -e "${RED}Example for Liu Lab:${NC}" >&2
+	echo "$0 -g $example_gene -b $bedfile -d $alnpath" >&2
+}
+
+while getopts ":g:b:d:e:f:o:s:h" opt; do
+	case $opt in
+		g) gflag=true; gene=$OPTARG;;
+		b) bflag=true; bed=$OPTARG;;
+		d) dflag=true; bampath=$OPTARG;;
+		e) ext=$OPTARG;;
+		s) genomesize_file=$OPTARG;;
+		f) feature=$OPTARG;;
+		o) outpath=$OPTARG;;
+		h) usage; exit 1;;
+		\?) echo "Invalid options: -$OPTARG." >&2; exit 1;;
+		:) echo "Option -$OPTARG requires an argument" >&2; exit 1;;
+	esac
+done
+
+### three required arguments
+if [ ! $gflag ]; then
+	echo "gene name is missing; use -g to add" >&2
+	exit 1
+fi
+
+if [ ! $bflag ]; then
+	echo "bed file is missing; use -b to add" >&2
+	exit 1
+fi
+
+if [ ! $dflag ]; then
+	echo "Directory path for BAM files are missing, use -d to add"
+	exit 1
+fi
+
+if [ $# == 0 ]; then
+	usage; exit 1;
+fi
+
+### generate a bed file
+if [ -f $bed ]; then
+	grep $gene $bed > $gene
+	if [ $ext > 0 ]; then
+		genebed=$gene.slop.both.$ext.bp
+		bedtools slop -i $gene -b $ext -g $genomesize_file > $genebed
+		rm $gene
+	else
+		genebed=$gene
+	fi
+else
+	echo "$bed can not be found";
+	exit 1
+fi
+
+### output directory
+if [ ! -d $outpath ]; then
+	mkdir $outpath
+fi
+
+### extract BAM data
+feature2=$(echo $feature | sed 's/bam$//g')
+
+if [ -f $genebed ] && [ -d $bampath ]; then
+	for bam in $bampath/*$feature2*bam; do
+		echo $bam
+		bamfile=$(echo $bam | sed 's/.*\///g')
+		samtools view -bh -L $genebed $bam > $outpath/$genebed.$bamfile
+		samtools index $outpath/$genebed.$bamfile
+	done
+else
+	echo "Invalid $genebed or $bampath"
+	exit 1
+fi
+

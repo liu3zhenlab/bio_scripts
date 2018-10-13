@@ -16,6 +16,7 @@ sub prompt {
 	Usage: perl fasta.scan.pl --fasta <fasta file> [other options]
 	[win]:		integer, windown size, default=100 bp
 	[step]:		integer, step size, default=50 bp
+	[minwin]:	integer, minimum window size
 	[feature]:	string, to indicate the module to run, the modules
 				include the default "gc" (GC%) and ... (add later)
 	[help]:		help information
