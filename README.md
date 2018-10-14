@@ -1,6 +1,6 @@
 scripts
 =======
 
-Here I deposited some useful scripts to share.
+Here I deposited some bioinformatics scripts to share.
 
 
