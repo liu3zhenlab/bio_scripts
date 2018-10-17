@@ -8,7 +8,7 @@ mkdir ~/virtualenvs
 cd ~/virtualenvs
 virtualenv python3.6.4 # python3.6.4 can be any name
 ```
-3. install albacore
+3. Install albacore
 ```
 source ~/virtualenvs/python3.6.4/bin/activate
 pip3 install <path-to-downloaded_albacore_package>
