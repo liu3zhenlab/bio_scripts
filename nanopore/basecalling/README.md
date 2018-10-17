@@ -15,8 +15,30 @@ pip3 install <path-to-downloaded_albacore_package>
 deactivate
 ```
 ### Base calling
+Run the script "albacore.basecall.sbatch" for base calling.
+First, set slurm run parameters in the script.
 ```
-# change parameters in albacore.basecall.sbatch
+#SBATCH --mem-per-cpu=2G
+#SBATCH --time=0-292:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+#SBATCH --partition=ksu-plantpath-liu3zhen.q,batch.q,killable.q
+```
 
+Second, change data information in the script
+```
+# base calling with albacore
+datadir=/bulk/liu3zhen/LiuRawData/nanopore/A188WGS181010A/  # directory saving data
+outname=albacore.python3.6.4
+nthreads=16  # need to be consistent with SBATCH parameters
+
+flowcell=FLO-MIN106
+kit=SQK-LSK109
+outfmt=fastq
+fast5dir=$datadir"/fast5/pass"
+```
+
+Third, run the script
+```
 sbatch albacore.basecall.sbatch
 ```
