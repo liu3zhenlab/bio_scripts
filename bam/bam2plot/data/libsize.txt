@@ -1,2 +1,0 @@
-DH10B.parse.bam	936747
-MG1655.parse.bam	968969
