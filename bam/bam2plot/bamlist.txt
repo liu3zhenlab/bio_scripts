@@ -1,2 +1,2 @@
-https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/bam/bam2plot/data/DH10B.parse.bam
-https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/bam/bam2plot/data/MG1655.parse.bam
+https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/bam/bam2plot/data/DH10B.parse.bam  936747
+https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/bam/bam2plot/data/MG1655.parse.bam 968969
