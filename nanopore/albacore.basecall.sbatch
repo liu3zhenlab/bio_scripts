@@ -3,13 +3,11 @@
 #SBATCH --time=0-292:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
-##SBATCH --partition=ksu-gen-gpu.q
+#SBATCH --partition=ksu-plantpath-liu3zhen.q,batch.q,killable.q
 
 # load python and use virtual environment
 module load Python/3.6.4-foss-2018a
 source ~/virtualenvs/python3.6.4/bin/activate
-#export PYTHON_LIBRARY=/homes/liu3zhen/virtualenvs/python3/lib/
-#export PYTHON_INCLUDE_DIR=/homes/liu3zhen/virtualenvs/python3/include/
 
 # base calling with albacore
 datadir=/bulk/liu3zhen/LiuRawData/nanopore/A188WGS181010A/
