@@ -15,5 +15,8 @@ pip3 install <path-to-downloaded_albacore_package>
 deactivate
 ```
 ### Base calling
+```
+# change parameters in albacore.basecall.sbatch
 
-
+sbatch albacore.basecall.sbatch
+```
