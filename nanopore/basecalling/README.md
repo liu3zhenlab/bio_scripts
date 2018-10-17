@@ -29,14 +29,14 @@ First, set slurm run parameters in the script.
 Second, change data information in the script
 ```
 # base calling with albacore
-datadir=/bulk/liu3zhen/LiuRawData/nanopore/A188WGS181010A/  # directory saving data
+datadir=/bulk/liu3zhen/LiuRawData/nanopore/A188WGS181010A/  # directory hosting input fast5 directory
 outname=albacore  # could be library ID
 nthreads=16  # need to be consistent with SBATCH parameters
 
 flowcell=FLO-MIN106
 kit=SQK-LSK109
 outfmt=fastq
-fast5dir=$datadir"/fast5/pass"  # directory saving fast5 data
+fast5dir=$datadir"/fast5"  # directory hosting input fast5 data
 ```
 
 Third, run the script
