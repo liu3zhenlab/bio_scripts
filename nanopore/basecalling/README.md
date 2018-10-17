@@ -15,7 +15,7 @@ pip3 install <path-to-downloaded_albacore_package>
 deactivate
 ```
 ### Base calling
-Run the script "albacore.basecall.sbatch" for base calling.
+Run the script *albacore.basecall.sbatch* for base calling.
 First, set slurm run parameters in the script.
 ```
 #SBATCH --mem-per-cpu=2G
