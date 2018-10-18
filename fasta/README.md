@@ -19,11 +19,10 @@ perl fasta.size.filter.pl --min 100 --max 50000 <a_fasta_file>
 ```
 ### pattern.search.pl
 A script to search matched patterns in a fasta sequence. Here are some example patterns:
-
-"N{100}" - exactly 100 Ns in a row
-"A{10,}" - >10 As in a row
-"A{5,8}" - 5-8 As in a row
-"[AG]CATG[TC]" - NspI restriction site
+1. "N{100}" - exactly 100 Ns in a row
+2. "A{10,}" - >10 As in a row
+3. "A{5,8}" - 5-8 As in a row
+4. "[AG]CATG[TC]" - NspI restriction site
 ```
 perl pattern.search.pl -I <fasta> -P <pattern>
 # more help information
