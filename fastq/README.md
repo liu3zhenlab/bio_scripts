@@ -1,7 +1,13 @@
-
+### fastq.total.bases.sh
+A Shell script to combine *seqtk* and awk to determine total basepairs, which contains two lines of codes.
+```
 fq=$1;
 seqtk comp $fq | awk '{total += $2} END {print "Total bases:", total}'
-
+```
+To run that, just type
+```
+sh fastq.total.bases.sh <a fastq file>
+```
 ### fastq2readlength.pl
 A Perl script to calculate length (bp) of each read in input fastq files. A basepair number per read was output in a line in the output file.
 ```
