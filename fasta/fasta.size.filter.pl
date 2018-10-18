@@ -10,15 +10,7 @@ use strict;
 use warnings;
 use Getopt::Long;
 
-my $seq;
-my %seq_size;
-my $seq_name;
-my $size;
-my $min;
-my $max;; 
-my $total;
-my $count;
-my $help;
+my ($seq, %seq_size, $seq_name, $size, $min, $max, $total, $count, $help);
 
 sub prompt {
 	print <<EOF;
