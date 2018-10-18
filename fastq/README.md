@@ -16,3 +16,5 @@ fqlen2hist(perlscript = fq2len.perl.file,
            nbin = 30,
            title = "xxx")
 ```
+### trimmomatic.PE.LT.sh
+A script to trim adaptor and low-quality sequences for Illumina PE reads
