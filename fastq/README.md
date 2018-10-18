@@ -1,4 +1,7 @@
 
+fq=$1;
+seqtk comp $fq | awk '{total += $2} END {print "Total bases:", total}'
+
 ### fastq2readlength.pl
 A Perl script to calculate length (bp) of each read in input fastq files. A basepair number per read was output in a line in the output file.
 ```
