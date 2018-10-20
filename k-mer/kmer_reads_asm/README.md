@@ -19,9 +19,11 @@ kmerid_reads=kmertable.tmp
 _required data files_
 1. kmer_table: two columns with 1st column of k-mer names and 2nd column of k-mer sequences
 2. fastq_files: at least one fastq file is needed; multple fastq can be input.
+_Usage_: perl kmer2fqreads.pl <kmer_table> <fastq_files>
 ```
-perl kmer2fqreads.pl <kmer_table> <fastq_files>
+perl kmer2fqreads.pl $kmer_table $infq1 $infq2 >$kmerid_reads
 ```
+
 ### step 2. extract reads sequences
 ```
 select_kmer_id=k1
