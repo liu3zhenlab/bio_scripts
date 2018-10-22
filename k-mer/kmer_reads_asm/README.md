@@ -53,7 +53,8 @@ fi
 $srcdir/fq2asm -f $outdir/$outfq1 -s $outdir/$outfq2 -o $outdir/asm_out -n $prefix_name 1>$prefix_name.fq2asm.log 2>&1
 ```
 
-### step 4. check output
+### step 4. check assembly output
+If contigs (ctg) are output, use contigs as the final assembled result. If contigs are not output and unitigs are produced, use unitigs (utg) as the final result. Otherwise, the assembly step is not successful.
 ```
 asmout=$outdir/asm_out/9-terminator/$prefix_name
 if [ -s $asmout".ctg.fasta" ]; then cp $asmout".ctg."* $outdir/; fi
