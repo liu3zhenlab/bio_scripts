@@ -6,33 +6,60 @@ A pipeline to search reads harboring k-mers for de novo assembly.
 2. wgs assembler
 
 ### input
+*subject to change*
 ```
-kmer_table=../data/data_kmer.txt
-infq1=../data/data_1.fq
-infq2=../data/data_2.fq
+kmers=CGACCACAGGCTCACACACCTCACC,ATGTGGGGTGAGGTGTGTGAGCCTG # a k-mer or k-mers separated by comma
+infq1=example.R1.pair.fq
+infq2=example.R2.pair.fq
+outdir="example"
+prefix_name="example"
+srcdir=<path_to src>
+```
+
+### produce some output file names based on the input information
+*don't need to change*
+```
+infq1name=$(echo $infq1 | sed 's/.*\///g')
+infq2name=$(echo $infq2 | sed 's/.*\///g')
+outfq1=$prefix_name"_"$infq1name
+outfq2=$prefix_name"_"$infq2name
 
 ### intermediate 
-kmerid_reads=kmertable.tmp
+kmer_reads=$prefix_name"_read_list"
 ```
 
 #### step 1. find reads harboring k-mers - kmer2fqreads.pl
-_required data files_
+*required data files*
 1. kmer_table: two columns with 1st column of k-mer names and 2nd column of k-mer sequences
 2. fastq_files: at least one fastq file is needed; multple fastq can be input.
-_Usage_: perl kmer2fqreads.pl <kmer_table> <fastq_files>
+_Usage_: perl kmerseq2fqreadnames.pl --kmer <kmers separated by comma> --fastq <fastq_files separated by comma>
 ```
-perl kmer2fqreads.pl $kmer_table $infq1 $infq2 >$kmerid_reads
+perl $srcdir/kmerseq2fqreadnames.pl --kmer $kmers --fastq $infq1,$infq2 | sort | uniq >  $kmer_reads
 ```
 
 ### step 2. extract reads sequences
 ```
-select_kmer_id=k1
-outdir=$select_kmer_id"_output"
-pe.reads.extraction -k $select_kmer_id -t $kmerid_reads -f $infq1 -s $infq2 -o $outdir
+$srcdir/readnames2fqreads -l $kmer_reads -f $infq1 -s $infq2 -p $prefix_name -o $outdir -a $outfq1 -b $outfq2
 ```
 
 ### step 3. assemble reads
 ```
-pe2asm -f $outdir/k1_data_1.fq -s $outdir/k1_data_2.fq -o $outdir -n k1asm
+if [ -d $outdir/asm_out ]; then
+	rm -r $outdir/asm_out
+else
+	mkdir $outdir/asm_out
+fi
+$srcdir/fq2asm -f $outdir/$outfq1 -s $outdir/$outfq2 -o $outdir/asm_out -n $prefix_name 1>$prefix_name.fq2asm.log 2>&1
 ```
+
+### step 4. check output
+```
+asmout=$outdir/asm_out/9-terminator/$prefix_name
+if [ -s $asmout".ctg.fasta" ]; then cp $asmout".ctg."* $outdir/; fi
+if [ ! -s $asmout".ctg.fasta" ] && [ -s $asmout".utg.fasta" ]; then cp $asmout".utg."* $outdir/; fi
+if [ ! -s $asmout".utg.fasta" ]; then echo "no successful assembly was output" >>$prefix_name.fq2asm.log; fi
+```
+
+### suggestions for examining assemblied sequences
+Multiple contigs (ctg) or unitigs (utg) could be generated. K-mers need to be matched with each assembled sequence to see which one carries which k-mer. Blastn could be used for this purpose or just manual checking. The read depth for each assembled sequence is on the sequence title, which provides useful information.
 
