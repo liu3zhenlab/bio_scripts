@@ -24,9 +24,9 @@ while getopts ":f:s:r:o:n:m:v:t:q;h" opt; do
 		o) outpath=$OPTARG;;
 		n) prefix=$OPTARG;;
 		f) fq1=$OPTARG;;
-        s) fq2=$OPTARG;;
+                s) fq2=$OPTARG;;
 		r) fq=$OPTARG;;
-        m) insert_mean=$OPTARG;;
+                m) insert_mean=$OPTARG;;
 		v) insert_var=$OPTARG;;
 		t) tech=$OPTARG;;
 		q) qtype=$OPTARG;;
