@@ -4,6 +4,7 @@ A pipeline to search reads harboring k-mers for de novo assembly.
 #### Prerequirement
 1. seqtk
 2. wgs assembler
+**Note**:If these required commands are not in executable paths, add "export <path_to_script>" to the shell script.
 
 ### input
 *subject to change*
