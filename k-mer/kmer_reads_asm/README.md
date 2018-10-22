@@ -1,5 +1,5 @@
 ### kmer_reads_asm
-A pipeline to search reads harboring k-mers for de novo assembly.
+A pipeline to identify and assemble reads harboring k-mers.
 
 #### Prerequirement
 1. seqtk
