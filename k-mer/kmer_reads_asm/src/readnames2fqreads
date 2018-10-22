@@ -21,14 +21,14 @@ while getopts ":l:f:s:o:p:a:b:h" opt; do
     case $opt in
         l) list=$OPTARG;;
 		f) firstfq=$OPTARG;;
-        s) secondfq=$OPTARG;;
+        	s) secondfq=$OPTARG;;
 		o) outpath=$OPTARG;;
-        p) prefix=$OPTARG;;
+        	p) prefix=$OPTARG;;
 		a) fq1=$OPTARG;;
 		b) fq2=$OPTARG;;
-        h) usage; exit;;
-        \?) echo "Invalid options: -$OPTARG." >&2; exit;;
-        :) echo "Option -$OPTARG requires an argument" >&2; exit;;
+        	h) usage; exit;;
+        	\?) echo "Invalid options: -$OPTARG." >&2; exit;;
+        	:) echo "Option -$OPTARG requires an argument" >&2; exit;;
     esac
 done
 
