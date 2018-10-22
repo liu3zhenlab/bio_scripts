@@ -1,0 +1,89 @@
+#!/bin/bash
+# Sanzhen Liu
+# 10/19/2018
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+usage() {
+	echo -e "${RED}Prerequirement${NC}: wgs_assembler"
+	echo -e "${RED}Usage${NC}: $0 -f <1st reads> -s <2nd reads> [other options]" >&2
+	echo "       -f: fastq file for 1st reads"
+	echo "       -s: fastq file for 2nd reads" 
+	echo "       -r: single-end reads"
+	echo "       -o: dirctory for outputs"
+	echo "       -n: common prefix for outputs"
+	echo "       -m: mean of insert lengths; default=300";
+	echo "       -v: range of insert lengths from the mean; default=150";
+	echo "       -t: technology; default=illumin; see more in fastqToCA manual";
+	echo "       -q: quality type; default=sanger; see more in fastqToCA manual";
+	echo "       -h: help information"
+}
+
+while getopts ":f:s:r:o:n:m:v:t:q;h" opt; do
+    case $opt in
+		o) outpath=$OPTARG;;
+		n) prefix=$OPTARG;;
+		f) fq1=$OPTARG;;
+        s) fq2=$OPTARG;;
+		r) fq=$OPTARG;;
+        m) insert_mean=$OPTARG;;
+		v) insert_var=$OPTARG;;
+		t) tech=$OPTARG;;
+		q) qtype=$OPTARG;;
+		h) usage; exit;;
+        \?) echo "Invalid options: -$OPTARG." >&2; exit;;
+        :) echo "Option -$OPTARG requires an argument" >&2; exit;;
+    esac
+done
+
+if [ -z $outpath ] || [ -z $prefix ]; then
+	echo -e "${RED}Error${NC}: Parameters -o -n are required" >&2;
+	usage;
+	exit;
+fi
+
+if [ -z $fq1 ] && [ -z $fq2 ]; then
+	if [ -z $fq ]; then
+		echo "Fastq input requires both -f and -s (PE reads) or -r (SE reads)" >&2;
+		usage;
+		exit;
+	fi
+else
+	if [ -z $fq1 ] || [ -z $fq2 ]; then
+		echo "PE fastq input requires both -f and -s" >&2;
+		usage;
+		exit;
+	fi
+fi
+
+if [ -z $insert_mean ]; then insert_mean=300; fi
+if [ -z $insert_var ]; then insert_var=150; fi
+if [ -z $tech ]; then tech=illumina-long; fi
+if [ -z $qtype ]; then qtype=sanger; fi
+
+### check reads pairs and number:
+
+
+### assembly
+if [ ! -z $fq1 ] && [ ! -z $fq2 ]; then
+	if [ -z $fq ]; then
+		fastqToCA -insertsize $insert_mean $insert_var -libraryname $prefix \
+			-technology $tech -type $qtype \
+			-innie -mates $fq1,$fq2 > $outpath/$prefix.frg
+	else
+		fastqToCA -insertsize $insert_mean $insert_var -libraryname $prefix \
+		-technology $tech -type $qtype \
+		-innie -mates $fq1,$fq2 --reads $fq > $outpath/$prefix.frg
+	fi
+else
+	if [ ! -z $fq ]; then
+		fastqToCA -insertsize $insert_mean $insert_var -libraryname $prefix \
+		-technology $tech -type $qtype \
+		-innie --reads $fq > $outpath/$prefix.frg
+	fi
+fi
+
+if [ -f $outpath/$prefix.frg ]; then
+	runCA -d $outpath -p $prefix $outpath/$prefix.frg
+fi
+

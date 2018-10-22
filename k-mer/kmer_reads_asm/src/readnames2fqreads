@@ -1,0 +1,77 @@
+#!/bin/bash
+# Sanzhen Liu
+# 10/19/2018
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+usage() {
+	echo -e "${RED}Prerequirement${NC}: seqtk"
+	echo -e "${RED}Usage${NC}: $0 -t <reads_list> -f <1st fastq> -s <2nd fastq> [other options]" >&2
+	echo "       -l: file in which contains a read name per line" >&2
+	echo "       -f: fastq file; single-end fastq or 1st file of paired-end fastq " >&2
+	echo "       -s: fastq file for 2nd reads of paired-end reads" >&2
+	echo "       -p: prefix for output; default=out" >&2
+	echo "       -o: dirctory to output fastq files; default is prefix" >&2
+	echo "       -a: output fastq name of 1st reads; path must not be included; default=prefix_original_fastqname" >&2
+	echo "       -b: output fastq name of 2nd reads; path must not be included; default=prefix_original_fastqname" >&2
+	echo "       -h: help information" >&2
+}
+
+while getopts ":l:f:s:o:p:a:b:h" opt; do
+    case $opt in
+        l) list=$OPTARG;;
+		f) firstfq=$OPTARG;;
+        s) secondfq=$OPTARG;;
+		o) outpath=$OPTARG;;
+        p) prefix=$OPTARG;;
+		a) fq1=$OPTARG;;
+		b) fq2=$OPTARG;;
+        h) usage; exit;;
+        \?) echo "Invalid options: -$OPTARG." >&2; exit;;
+        :) echo "Option -$OPTARG requires an argument" >&2; exit;;
+    esac
+done
+
+### check required parameters
+if [ -z $list ] || [ -z $firstfq ]; then
+	echo -e "${RED}ERROR${NC}: Required parameters: -l; -f." >&2
+	usage;
+	exit;
+fi
+
+if [ -z $prefix ]; then
+	prefix=out
+fi
+### output directory
+if [ -z $outpath ]; then
+	outpath=$prefix
+fi
+
+if [ ! -d $outpath ]; then
+	mkdir $outpath
+else
+	echo -e "${RED}WARNING:${NC}Directory of "$outpath" exists" >&2 
+fi
+
+### extract reads
+if [ -f $firstfq ]; then
+	firstfile=$(echo $firstfq | sed 's/.*\///g')
+	if [ -z $fq1 ]; then fq1=$prefix"_"$firstfile; fi
+	seqtk subseq $firstfq $list > $outpath"/"$fq1
+	nfirst=$(expr $(wc -l $outpath"/"$fq1 | sed 's/ .*//g') / 4)
+	echo "Number of reads in 1st fastq = "$nfirst
+
+	# 2nd reads if input
+	if [ ! -z $secondfq ] && [ -f $secondfq ]; then
+		secondfile=$(echo $secondfq | sed 's/.*\///g')
+		if [ -z $fq2 ]; then fq2=$prefix"_"$secondfile; fi
+		seqtk subseq $secondfq $list > $outpath"/"$fq2
+		nsecond=$(expr $(wc -l $outpath"/"$fq2 | sed 's/ .*//g') / 4)
+		echo "Number of reads in 2nd fastq = "$nsecond
+	else
+		if [ ! -z $fq2 ]; then
+			echo -e "${RED}Warning${NC}:No 2nd fastq file was input; -b parameter will be ignored." >&2
+		fi
+	fi
+fi
+
