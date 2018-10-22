@@ -31,8 +31,8 @@ kmer_reads=$prefix_name"_read_list"
 
 #### step 1. find reads harboring k-mers - kmer2fqreads.pl
 *required data files*
-1. kmer_table: two columns with 1st column of k-mer names and 2nd column of k-mer sequences
-2. fastq_files: at least one fastq file is needed; multple fastq can be input.
+1. kmers: sequences of a list of k-mers separated by comma
+2. fastq_files: one fastq file or multple fastq files separated by comma
 _Usage_: perl kmerseq2fqreadnames.pl --kmer <kmers separated by comma> --fastq <fastq_files separated by comma>
 ```
 perl $srcdir/kmerseq2fqreadnames.pl --kmer $kmers --fastq $infq1,$infq2 | sort | uniq >  $kmer_reads
