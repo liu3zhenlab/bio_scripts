@@ -6,7 +6,7 @@ A pipeline to identify and assemble reads harboring k-mers.
 2. wgs assembler
 **Note**:If these required commands are not in executable paths, add "export <path_to_script>" to the shell script.
 
-### input
+### specify input information
 *subject to change*
 ```
 kmers=CGACCACAGGCTCACACACCTCACC,ATGTGGGGTGAGGTGTGTGAGCCTG # a k-mer or k-mers separated by comma
@@ -29,7 +29,7 @@ outfq2=$prefix_name"_"$infq2name
 kmer_reads=$prefix_name"_read_list"
 ```
 
-#### step 1. find reads harboring k-mers - kmer2fqreads.pl
+### step 1. find reads harboring k-mers - kmer2fqreads.pl
 *required data files*
 1. kmer_table: two columns with 1st column of k-mer names and 2nd column of k-mer sequences
 2. fastq_files: at least one fastq file is needed; multple fastq can be input.
