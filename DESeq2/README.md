@@ -4,10 +4,10 @@ testing using diff parameters (DE)
 
 #### Fisrt, source the module
 ```
-source("DESeq2.single.trt.R")
+source("https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/DESeq2/DESeq2.single.trt.R")
 ```
 
-#### Second, generate data under null hypothesis
+#### Second, generate an example data under null hypothesis
 ```
 indata <- data.frame(Gene=paste("g", 1:5000, sep=""),
 	Group1_rep1=rpois(n=5000, lambda=50),
@@ -31,6 +31,6 @@ rownames(input) <- indata[, 1]
 
 # DE:
 DE.out <- DESeq2.single.trt(input.matrix=input, comparison=comparison,
-							geneID=rownames(input), fdr=0.05,
-							logpath=".", logfile="log.log")
+                            geneID=rownames(input), fdr=0.05,
+                            logpath=".", logfile="log.log")
 ```
