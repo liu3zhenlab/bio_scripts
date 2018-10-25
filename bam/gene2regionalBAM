@@ -7,14 +7,6 @@ ext=0; # default value
 feature=bam # default feature of BAM files
 outpath=. # default output directory
 
-gflag=false
-bflag=false
-dflag=false
-
-example_gene=Zm00001d018635
-bedfile=/home/liu3zhen/references/B73refgen4/genemodel/B73Ref4.gene.bed
-alnpath=/data1/home/liu3zhen/newB73Mo17WGS/v4alignment
-
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 usage () {
@@ -33,14 +25,13 @@ usage () {
 	echo "        feature also could be file names separated by |" >&2
 	echo "    -o: output directory; default=." >&2
 	echo -e "${RED}Example for Liu Lab:${NC}" >&2
-	echo "$0 -g $example_gene -b $bedfile -d $alnpath" >&2
 }
 
 while getopts ":g:b:d:e:f:o:s:h" opt; do
 	case $opt in
-		g) gflag=true; gene=$OPTARG;;
-		b) bflag=true; bed=$OPTARG;;
-		d) dflag=true; bampath=$OPTARG;;
+		g) gene=$OPTARG;;
+		b) bed=$OPTARG;;
+		d) bampath=$OPTARG;;
 		e) ext=$OPTARG;;
 		s) genomesize_file=$OPTARG;;
 		f) feature=$OPTARG;;
@@ -52,17 +43,17 @@ while getopts ":g:b:d:e:f:o:s:h" opt; do
 done
 
 ### three required arguments
-if [ ! $gflag ]; then
+if [ -z $gene ]; then
 	echo "gene name is missing; use -g to add" >&2
 	exit 1
 fi
 
-if [ ! $bflag ]; then
+if [ -z $bed ]; then
 	echo "bed file is missing; use -b to add" >&2
 	exit 1
 fi
 
-if [ ! $dflag ]; then
+if [ -z $bampath ]; then
 	echo "Directory path for BAM files are missing, use -d to add"
 	exit 1
 fi
