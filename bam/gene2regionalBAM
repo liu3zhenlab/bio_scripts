@@ -24,7 +24,6 @@ usage () {
 	echo "        feature could specified in a regular expression format" >&2
 	echo "        feature also could be file names separated by |" >&2
 	echo "    -o: output directory; default=." >&2
-	echo -e "${RED}Example for Liu Lab:${NC}" >&2
 }
 
 while getopts ":g:b:d:e:f:o:s:h" opt; do
