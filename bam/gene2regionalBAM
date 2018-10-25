@@ -24,7 +24,6 @@ usage () {
 	echo "        feature could specified in a regular expression format" >&2
 	echo "        feature also could be file names separated by |" >&2
 	echo "    -o: output directory; default=." >&2
-	echo -e "${RED}Example for Liu Lab:${NC}" >&2
 }
 
 while getopts ":g:b:d:e:f:o:s:h" opt; do
@@ -43,6 +42,10 @@ while getopts ":g:b:d:e:f:o:s:h" opt; do
 done
 
 ### three required arguments
+if [ $# == 0 ]; then
+    usage; exit 1;
+fi
+
 if [ -z $gene ]; then
 	echo "gene name is missing; use -g to add" >&2
 	exit 1
@@ -56,10 +59,6 @@ fi
 if [ -z $bampath ]; then
 	echo "Directory path for BAM files are missing, use -d to add"
 	exit 1
-fi
-
-if [ $# == 0 ]; then
-	usage; exit 1;
 fi
 
 ### generate a bed file
