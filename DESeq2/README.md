@@ -1,6 +1,5 @@
-### DESeq2
-
-testing using diff parameters (DE)
+### DESeq2.single.trt.R
+R script to perform a single-factor comparison to identify differential expression (DE)
 
 #### Fisrt, source the module
 ```
