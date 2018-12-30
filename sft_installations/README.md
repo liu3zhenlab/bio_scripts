@@ -1,0 +1,1 @@
+### memo of software installations
