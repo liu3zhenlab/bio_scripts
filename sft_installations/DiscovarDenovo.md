@@ -1,5 +1,3 @@
-### DiscovarDenovo
-
 #### DiscoverDenovo installation in Beocat
 
 Dependancy - jemalloc
