@@ -11,13 +11,16 @@ cd jemalloc-5.1.0
 make
 make install
 ```
-DiscovarDenovo
+discovarDenovo
 ```
 # download the latest DiscovarDenovo and enter into the directory
-wget ftp://ftp.broadinstitute.org/pub/crd/DiscovarDeNovo/latest_source_code/discovardenovo-52488.tar.gz
-tar -xf discovardenovo-52488.tar.gz
-cd discovardenovo-52488
-./configure --prefix=/homes/liu3zhen/local --with-jemalloc=/homes/liu3zhen/local/lib
+install_dir=/homes/liu3zhen/local
+jemalloc_dir=/homes/liu3zhen/local
+disc_version=discovardenovo-52488
+wget ftp://ftp.broadinstitute.org/pub/crd/DiscovarDeNovo/latest_source_code/$disc_version.tar.gz
+tar -xf $disc_version.tar.gz
+cd $disc_version
+./configure --prefix=$install_dir --with-jemalloc=$jemalloc_dir/lib
 make all
 make install
 ```
