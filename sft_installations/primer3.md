@@ -2,7 +2,7 @@
 ```
 sudo apt-get install primer3
 ```
-The associated configure files are located at /etc/primer3_config/
+The associated configure files are located at "/etc/primer3_config/"
 
 ### Instalation of primer3 in CentOS (slurm system) without root accessibility
 ```
