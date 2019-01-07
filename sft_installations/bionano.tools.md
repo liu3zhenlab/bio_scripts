@@ -16,6 +16,6 @@ python $pipeline_dir/pipelineCL.py -h
 binary_dir=/homes/liu3zhen/software/BioNano/tools/pipeline/1.0/RefAligner/1.0
 $binary_dir/RefAligner -help
 ```
-If RefAligner does not work, try running RefAligner on the subdirectory of "sse" or "avx".
+If RefAligner does not work, try running RefAligner on the subdirectory of "sse" or "avx" (under $binary_dir).
 
 If all look fine, run commands.
