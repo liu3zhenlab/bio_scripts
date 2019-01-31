@@ -41,4 +41,4 @@ $npPath/nanopolish variants --consensus \
 # change fasta based on vcf
 $npPath/nanopolish vcf2fasta --skip-checks -g $seq out.vcf > polished.fas
 ```
-Our test run on a ~800kb sequence takes ~16h to finish. The highest member usage was ~18Gb.
+Our test run with 8 CPUs on a ~800kb sequence took ~16h to finish. The highest member usage was ~18Gb.
