@@ -2,7 +2,7 @@
 
 First, download the package:
 ```
-get –N www.bnxinstall.com/access/tools/access.tools.saphyr.tgz
+wget –N www.bnxinstall.com/access/tools/access.tools.saphyr.tgz
 tar -xvf access.tools.saphyr.tgz
 ```
 
