@@ -1,3 +1,3 @@
 ## SLURM tricks
 
-Slurm tricks will be documented today.
+Slurm tricks will be documented.
