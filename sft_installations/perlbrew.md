@@ -5,7 +5,7 @@ Previously Perl5.22.0 was installed. The path is ~/perl5/perlbrew/perls/perl-5.2
 
 Next is to install Perl 5.18.0.
 ```
-perlbree install perl-5.18.0 # take a while to install
+perlbrew install perl-5.18.0 # take a while to install
 ```
 
 Run the following script to test all installed versions.
