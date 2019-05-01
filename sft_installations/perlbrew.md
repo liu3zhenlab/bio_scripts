@@ -1,7 +1,7 @@
 ## Install Perlbrew at Beocat.
 **perlbrew** is an admin-free perl installation management tool. 
 
-First, install perlbrew and install Perl 5.22.3.
+First, install perlbrew and Perl 5.22.3.
 ```
 curl -L http://install.perlbrew.pl | bash
 #Make sure that ~/.bash_profile exists
