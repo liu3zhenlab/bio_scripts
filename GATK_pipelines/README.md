@@ -25,7 +25,7 @@ Options:
 --time <time>: running time for each array subjob; default=0-23:59:59  
 --threads <num>: running thread per job; default=1  
 --selectseq <file containing names of targeted sequences>: equence names for variant discovery;  
-  one per line. All sequences will be used if no file is provided.  
+       one per line. All sequences will be used if no file is provided.  
 --java <java module>: Java module; default=Java/1.8.0_192  
 --maxlen <max length>: maximal interval length of each job to call variants; default=2000000  
 --checkscript: only produce scripts/files and no SBATCH run  
