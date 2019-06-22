@@ -1,17 +1,19 @@
-GATK4 multiple cpus in Slurm system
+GATK4 with multiple cpus in Slurm system
 ==============
-Basic script for SNP calling
+The script is designed for run GATK HaplotypeCaller with multiple CPUs in parellel. 
+
+Basic script for SNP calling:
 ```
-ref=<path to reference file, including the reference file>
+ref=<fasta>
 bamlist=<path to BAM files>
 outbase=example
 perl ../gatk.sbatch.pl --outbase $outbase \
   --bampaths $bamlist \
   --ref $ref \
-  --mem 12G --maxlen 10000000
 ```
 
-List of parameters
+
+**List of parameters**
 Usage: perl gatk.sbatch.pl --ref <fasta> --bampaths <path-to-bam> --outbase <base of outputs> [options]
 
 Options:
