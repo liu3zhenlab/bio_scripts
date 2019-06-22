@@ -19,9 +19,9 @@ perl $gatkscript \
 **List of parameters**
 Usage: perl gatk.sbatch.pl --ref <fasta> --bampaths <path-to-bam> --outbase <base of outputs> [options]
 
-Options:
+Options:  
 --outbase <base name>: base for all outputs, required  
---ref <ref fasta file>: path to the reference fasta file with suffix of "fa", "fas", or "fasta  
+--ref <ref fasta file>: required; including path to the reference fasta file with suffix of "fa", "fas", or "fasta  
       directory containing this file also has its indexed files: .dict and .fai  
 --bampaths <paths containing BAM files>: paths to directories containing bam files; required  
 --mem <memory>: memory per thread/cpu; default=24G  
