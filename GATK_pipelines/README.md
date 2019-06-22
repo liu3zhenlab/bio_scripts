@@ -5,10 +5,12 @@ The script is designed for run GATK HaplotypeCaller with multiple CPUs in parell
 Basic script for SNP calling:
 ```
 #!/bin/bash -l
+gatkscript=/homes/liu3zhen/local/slurm/snp/gatk.sbatch.pl
 ref=<fasta>
 bamlist=<path to BAM files>
 outbase=example
-perl ../gatk.sbatch.pl --outbase $outbase \
+perl $gatkscript \
+  --outbase $outbase \
   --bampaths $bamlist \
   --ref $ref \
 ```
