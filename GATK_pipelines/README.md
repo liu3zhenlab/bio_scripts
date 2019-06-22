@@ -4,6 +4,7 @@ The script is designed for run GATK HaplotypeCaller with multiple CPUs in parell
 
 Basic script for SNP calling:
 ```
+#!/bin/bash -l
 ref=<fasta>
 bamlist=<path to BAM files>
 outbase=example
@@ -19,7 +20,7 @@ Usage: perl gatk.sbatch.pl --ref <fasta> --bampaths <path-to-bam> --outbase <bas
 Options:
 --outbase <base name>: base for all outputs, required  
 --ref <ref fasta file>: path to the reference fasta file with suffix of "fa", "fas", or "fasta  
-       directory containing this file also has its indexed files: .dict and .fai  
+      directory containing this file also has its indexed files: .dict and .fai  
 --bampaths <paths containing BAM files>: paths to directories containing bam files; required  
 --mem <memory>: memory per thread/cpu; default=24G  
 --time <time>: running time for each array subjob; default=0-23:59:59  
