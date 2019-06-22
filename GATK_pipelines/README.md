@@ -1,11 +1,30 @@
-GATK_pipelines
+GATK4 multiple cpus in Slurm system
 ==============
-This repository is an simple example for how to use GATK to discover SNP and INDELs. It is for the tutorial purpose. The parameters are not optimized.
-
-Two shell scripts were used in the analysis: snp.sh and variantSelect.sh. In each of the scripts, you need to change various things in the PART1. After the modification, run:
+Basic script for SNP calling
 ```
-sh snp.sh ### discover both SNPs and INDELs
-
-sh variantSelect.sh ### select confident SNPs
+ref=<path to reference file, including the reference file>
+bamlist=<path to BAM files>
+outbase=example
+perl ../gatk.sbatch.pl --outbase $outbase \
+  --bampaths $bamlist \
+  --ref $ref \
+  --mem 12G --maxlen 10000000
 ```
 
+List of parameters
+Usage: perl gatk.sbatch.pl --ref <fasta> --bampaths <path-to-bam> --outbase <base of outputs> [options]
+
+Options:
+--outbase <base name>: base for all outputs, required
+--ref <ref fasta file>: path to the reference fasta file with suffix of "fa", "fas", or "fasta
+       directory containing this file also has its indexed files: .dict and .fai
+--bampaths <paths containing BAM files>: paths to directories containing bam files; required
+--mem <memory>: memory per thread/cpu; default=24G
+--time <time>: running time for each array subjob; default=0-23:59:59
+--threads <num>: running thread per job; default=1
+--selectseq <file containing names of targeted sequences>: equence names for variant discovery;
+  one per line. All sequences will be used if no file is provided.
+--java <java module>: Java module; default=Java/1.8.0_192
+--maxlen <max length>: maximal interval length of each job to call variants; default=2000000
+--checkscript: only produce scripts/files and no SBATCH run
+--help: helping information
