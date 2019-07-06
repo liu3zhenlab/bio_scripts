@@ -1,5 +1,6 @@
-GATK4 with multiple cpus in Slurm system
-==============
+## gatk.sbatch.pl
+*GATK4 with multiple cpus in Slurm system*
+
 The script is designed for run GATK HaplotypeCaller with multiple CPUs in parellel. 
 
 Basic script for SNP calling:
