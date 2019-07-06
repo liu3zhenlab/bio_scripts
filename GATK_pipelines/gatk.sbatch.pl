@@ -8,16 +8,16 @@ my ($mem, $time, $bampaths, $help);
 my ($threads, $checkscript);
 my ($ref, $maxlen, $java, $outbase, $selectseq);
 my $result = &GetOptions("mem=s" => \$mem,
-                         "time=s" => \$time,
-						 "threads=i" => \$threads,
-						 "bampaths=s" => \$bampaths,
-						 "ref=s" => \$ref,
-						 "selectseq=s" => \$selectseq,
-						 "java=s" => \$java,
-						 "outbase=s" => \$outbase,
-						 "maxlen=i" => \$maxlen,
-						 "help" => \$help,
-						 "checkscript" => \$checkscript);
+                        "time=s" => \$time,
+			"threads=i" => \$threads,
+			"bampaths=s" => \$bampaths,
+			"ref=s" => \$ref,
+			"selectseq=s" => \$selectseq,
+			"java=s" => \$java,
+			"outbase=s" => \$outbase,
+			"maxlen=i" => \$maxlen,
+			"help" => \$help,
+			"checkscript" => \$checkscript);
 
 #0: preparation:
 $mem = "24G" if !defined $mem;
