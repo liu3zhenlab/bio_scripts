@@ -13,7 +13,7 @@ outbase=example
 perl $gatkscript \
   --outbase $outbase \
   --bampaths $bamlist \
-  --ref $ref \
+  --ref $ref
 ```
 
 
