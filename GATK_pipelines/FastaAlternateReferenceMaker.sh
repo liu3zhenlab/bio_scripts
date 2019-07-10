@@ -1,5 +1,5 @@
 #!/bin/sh
-# the script is to generate a new sequence with replacements the old sequence with variants in the vcf file
+# the script is to generate a new sequence with replacements with variants in the vcf file
 
 # input
 oldseq=old.seq
