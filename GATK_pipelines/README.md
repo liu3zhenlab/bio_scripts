@@ -17,7 +17,7 @@ perl $gatkscript \
 ```
 
 
-**List of parameters**
+**List of parameters**  
 Usage: perl gatk.sbatch.pl --ref <fasta> --bampaths <path-to-bam> --outbase <base of outputs> [options]
 
 Options:  
