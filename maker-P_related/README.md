@@ -2,7 +2,7 @@
 
 ## Repeats
 
-### Bio::perl
+### Bio::perl and other module using cpanm
 ```
 sudo cpanm Bio::Perl
 ```
@@ -73,4 +73,27 @@ cd RepeatModeler-open-1.0.11/
 sudo cpanm JSON
 perl ./configure 
 ```
+5. snap, augustus, exonerate
+```
+#wget http://korflab.ucdavis.edu/Software/snap-2013-11-29.tar.gz
+#cd snap
+#set ZOE path
+#make
+sudo apt-get install snap
+
+sudo apt-get install exonerate
+sudo apt-cache search Augustus
+sudo apt-cache search Augustus-data
+```
+
+6. Genemark-ES
+```
+tar -xf gm_et_linux_64.tar.gz 
+cd gm_et_linux_64/
+cp gm_key_64 ~/.gm_key 
+# set path
+```
+
+7. maker
+Follow maker instruction to install maker.
 
