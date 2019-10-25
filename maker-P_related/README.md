@@ -96,4 +96,5 @@ cp gm_key_64 ~/.gm_key
 
 7. maker
 Follow maker instruction to install maker.
+Install MPI even the server is has a single node.
 
