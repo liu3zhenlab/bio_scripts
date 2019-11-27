@@ -27,3 +27,5 @@ java -jar ~/software/picard/picard.jar mergeVcfs \
     O=$newvcf \
     D=$seqdict
 ```
+To merge multiple VCF, sample information on the row starting with "#CHROM" needs to be consistent.
+
