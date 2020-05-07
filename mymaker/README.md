@@ -1,5 +1,5 @@
 #### conda installation
-conda create -n mymaker -c bioconda make augustus=3.3.3
+conda create -n mymaker -c bioconda maker augustus=3.3.3
 
 
 #### install genemark-es
