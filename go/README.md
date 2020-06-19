@@ -16,7 +16,7 @@ head(datacols)
 
 ###GO enrichment
 ```
-source("goseq2019.R"
+source("goseq2019.R")
 go <- goseq.auto(data = de,
                  godb = godb,
                  geneheader = "Gene",
@@ -33,6 +33,7 @@ go <- goseq.auto(data = de,
 
 ###GO plotting
 ```
+source("goplot.R")
 goplot(go.out = go, main.space = 0.5, order.by = "pvals",
        term.space = 12, pval.cutoff = 0.01, xlim = c(0, 300))
 ```
