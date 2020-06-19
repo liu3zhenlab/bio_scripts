@@ -5,7 +5,7 @@
 
 ### Data preparation
 ```
-# add a column to state significancy
+# add a column to state significance
 fdr.cutoff <- 0.05
 de$sig <- "no"
 de$sig[de$padj < fdr.cutoff] <- "yes"
