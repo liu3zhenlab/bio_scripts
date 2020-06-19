@@ -1,5 +1,5 @@
-## GO enrichment analysis guide
-###Input data
+## GO enrichment analysis guide  
+### Input data  
 **de** dataframe containing genes, counts, adjusted p-values (padj)  
 **godb** two-column dataframe (Gene and GO)  
 
@@ -16,6 +16,7 @@ head(datacols)
 
 ###GO enrichment
 ```
+source("goseq2019.R"
 go <- goseq.auto(data = de,
                  godb = godb,
                  geneheader = "Gene",
