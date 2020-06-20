@@ -14,21 +14,16 @@ de$sig[de$padj < fdr.cutoff] <- "yes"
 head(datacols)
 ```
 
-###GO enrichment
+###GO enrichment (simple example)
 ```
 source("goseq2019.R")
 go <- goseq.auto(data = de,
                  godb = godb,
                  geneheader = "Gene",
                  sigcolname = "sig",
-                 nsampling = 10000,
                  rawdatacol = datacols,
-                 log2colname = NULL,
-                 up.down = c("up", "down"),
                  pvalcutoff = 0.01,
-                 minGene = 2,
-                 outsave = T,
-                 outpath = ".")
+                 minGene = 2)
 ```
 
 ###GO plotting
