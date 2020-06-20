@@ -16,7 +16,7 @@ head(datacols)
 
 ### GO enrichment (simple example)
 ```
-source("goseq2019.R")
+source("goseq.R")
 go <- goseq.auto(data = de,
                  godb = godb,
                  geneheader = "Gene",
