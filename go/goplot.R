@@ -95,7 +95,7 @@ goplot <- function(go.out,
     plotdata <- as.matrix(plotdata[!is.na(plotnames), ])  ### remove NA
     plotnames <- plotnames[!is.na(plotnames)]
 
-	par(mar=c(4, term.space, main.space , 2))
+	par(mar=c(3, term.space, main.space , 2))
     # obs
 	barpos <- barplot(plotdata[, 1], names.arg = "", horiz=T, col=bar.obs.color,
             axes=F, xlab="", ...)
@@ -107,9 +107,10 @@ goplot <- function(go.out,
  		text(plotdata[, 2], barpos, plotpval, pos=4, cex=pval.cex) 
     }
 	abline(v=0)
+	par(mgp = c(3, 0.5, 0))
 	xmax <- ceiling(max(plotdata) / tick.num) * tick.num
 	axis(side=1, at =seq(0, xmax, xmax / tick.num), cex.axis = axis.cex)
-	mtext(text = "Number of genes", line = 2.5, side = 1, cex = xlab.cex)
+	mtext(text = "Number of genes", line = 1.5, side = 1, cex = xlab.cex)
     if (outsave) { dev.off() }
   }
 }
