@@ -1,4 +1,4 @@
-## GO enrichment analysis guide  
+## GO enrichment analysis    
 ### Input data  
 **de** dataframe containing genes, counts, adjusted p-values (padj)  
 **godb** two-column dataframe (Gene and GO)  
