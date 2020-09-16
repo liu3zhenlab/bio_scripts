@@ -1,0 +1,56 @@
+#!/bin/bash
+# Sanzhen Liu
+# 10/19/2018
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+usage() {
+	echo -e "${RED}Prerequirement${NC}: wgs_assembler"
+	echo -e "${RED}Usage${NC}: $0 -f <1st reads> -s <2nd reads> [other options]" >&2
+	echo "       -f: fastq file for 1st reads"
+	echo "       -s: fastq file for 2nd reads" 
+	echo "       -o: dirctory for outputs"
+	echo "       -n: common name for outputs"
+	echo "       -m: mean of insert lengths; default=300";
+	echo "       -v: range of insert lengths from the mean; default=150";
+	echo "       -t: technology; default=illumin; see more in fastqToCA manual";
+	echo "       -q: quality type; default=sanger; see more in fastqToCA manual";
+	echo "       -h: help information"
+}
+
+while getopts ":f:s:o:n:m:v:t:q;h" opt; do
+    case $opt in
+		f) fq1=$OPTARG;;
+        s) fq2=$OPTARG;;
+		o) outpath=$OPTARG;;
+		n) name=$OPTARG;;
+        m) insert_mean=$OPTARG;;
+		v) insert_var=$OPTARG;;
+		t) tech=$OPTARG;;
+		q) qtype=$OPTARG;;
+		h) usage; exit;;
+        \?) echo "Invalid options: -$OPTARG." >&2; exit;;
+        :) echo "Option -$OPTARG requires an argument" >&2; exit;;
+    esac
+done
+
+if [ -z $fq1 ] || [ -z $fq2 ] || [ -z $outpath ] || [ -z $name ]; then
+	echo "Error: Parameters -f, -s, -o, -n are required" >&2;
+	usage;
+	exit;
+fi
+if [ -z $insert_mean ]; then insert_mean=300; fi
+if [ -z $insert_var ]; then insert_var=150; fi
+if [ -z $tech ]; then tech=illumina; fi
+if [ -z $qtype ]; then qtype=sanger; fi
+
+### check reads pairs and number:
+
+
+### assembly
+fastqToCA -insertsize $insert_mean $insert_var -libraryname $name \
+	-technology $tech -type $qtype \
+	-innie -mates $fq1,$fq2 > $outpath/$name.frg
+runCA -d $outpath -p $name $outpath/$name.frg
+rm $outpath/$name.frg
+

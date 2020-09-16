@@ -1,0 +1,156 @@
+#!/usr/bin/perl -w
+# Sanzhen Liu
+# 9/14/2020
+
+use warnings;
+use strict;
+use Getopt::Long;
+use File::Temp;
+use FindBin;
+use lib "$FindBin::Bin/lib";
+use kmer2readname;
+use fqpair;
+
+my $version = "0.1.0";
+
+my $insmean = 350;
+my $inssd = 200;
+sub prompt {
+	print <<EOF;
+	Usage: perl k2readasm [options]
+	--kmer <file>  : k-mer list, one k-mer per line; required
+	--r1 <file>    : fastq file of read 1 of paired-end reads; required 
+	--r2 <file>    : fastq file of read 2 of paired-end reads; optional
+	--noasm        : only perform extraction of reads if specified; off by default
+	--insmean <num>: mean of insert lengths ($insmean)  
+	--inssd <num>  : standard deviation of insert lengths ($inssd)
+	--prefix <str> : prefix for output (kra)
+	--help         : help information
+EOF
+exit;
+}
+
+###############################################
+# parameters:
+###############################################
+my %opts = ();
+my ($kmer, $r1, $r2, $prefix, $help);
+
+&GetOptions(\%opts, "kmer=s", "r1=s", "r2=s",
+                    "noasm", "insmean=i", "inssd=i",
+					"prefix=s", "version", "help");
+
+&prompt if exists $opts{help} or !%opts;
+
+if (exists $opts{version}) {
+	print "$0 $version\n";
+	exit;
+}
+
+$kmer = $opts{kmer} if (exists $opts{kmer});
+$r1 = $opts{r1} if (exists $opts{r1});
+$r2 = $opts{r2} if (exists $opts{r2});
+$insmean = $opts{insmean} if (exists $opts{insmean});
+$inssd = $opts{inssd} if (exists $opts{inssd});
+
+if (exists $opts{prefix}) {
+	$prefix = $opts{prefix};
+} else {
+	$prefix = "kra";
+}
+
+# utils
+my $scriptPath = $FindBin::Bin;
+my $binPath = $scriptPath."/bin";
+my $utilPath = $scriptPath."/utils";
+my $wgsPath = $scriptPath."/bin/wgs";
+
+###############################################
+# output
+###############################################
+# log
+my $logfile = $prefix.".0.log";
+open(LOG, ">", $logfile) || die;
+
+# kmer-readname table
+my $krn_out = $prefix.".1.kmer_readname"; # 3 cols: id, kmer, reads
+my $rn_out = $prefix.".2.readname"; # read names (1 col)
+
+# fastq read output:
+my $reads_prefix = $prefix.".3.reads";
+
+# asm output:
+my $asm_dir = $prefix.".4.asm";
+if (!exists $opts{noasm}) {
+	if (-d $asm_dir) {
+		`rm -rf $asm_dir`;
+	}
+	# create the directory for asm:
+	`mkdir $asm_dir`;
+}
+###############################################
+# kmer2reads
+###############################################
+my $fqout1 = $reads_prefix."_1.fq";
+my $fqout2 = $reads_prefix."_2.fq";
+if (exists $opts{r2}) {
+	kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1, $r2); 
+	`grep -f $rn_out $r1 -A 3 --no-group-separator > $fqout1`;
+	`grep -f $rn_out $r2 -A 3 --no-group-separator > $fqout2`;
+	
+	# check if two data paired:
+	my $paired = fqpair::fqpair($fqout1, $fqout2);
+	if ($paired) {
+		runreport("Paird fastq were generated");
+		if (-z $fqout1) {
+			runreport("fastq is empty");
+			exit;
+		}
+	} else {
+		runreport("Paird fastq generation failed");
+		exit;
+	}
+} else {
+	kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1);
+	`grep -f $rn_out $r1 -A 3 > $fqout1`;
+	if (! -z $fqout1) {
+		runreport("Single fastq were generated");
+	} else {
+		runreport("Single fastq were empty");
+		exit;
+	}
+}
+
+###############################################
+# reads to assembly
+###############################################
+if (exists $opts{noasm}) {
+	runreport("Assembly was skipped");
+} else {
+	my $frg = $asm_dir.".frg";
+	
+	if (exists $opts{r2}) {
+		`$wgsPath/fastqToCA -insertsize $insmean $inssd -libraryname $asm_dir -innie -mates $fqout1,$fqout2 > $frg`;
+	} else {
+		`$wgsPath/fastqToCA -insertsize $insmean $inssd -libraryname $asm_dir -innie -mates $fqout1 > $frg`;
+	}
+
+	# asm
+	`$wgsPath/runCA -d $asm_dir -p $asm_dir $frg`;
+	
+	# cleanup
+	`rm $frg`;
+	runreport("Assembly was completed");
+}
+###############################################
+## module 0: report running result
+#################################################
+sub runreport {
+	my $injob = shift;
+	my $dateinfo = `date +'o %Y-%m-%d %H:%M:%S'`;
+	print STDERR "$dateinfo";
+	print STDERR "  $injob.\n";
+	print LOG "$dateinfo  ";    
+	print LOG "  $injob.\n";
+}
+
