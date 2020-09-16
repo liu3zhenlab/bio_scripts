@@ -40,37 +40,85 @@ chomp $nfq1;
 
 my $unit = int($nfq1 / 4 / $npart); # reads in each unit
 
+my (@starts, @ends, @ids); # row start and end in each split file
 for (my $i=1; $i<=$npart; $i++) {
 	my $start = ($i - 1) * $unit * 4 + 1;
 	my $end = $i * $unit * 4;
 	if ($i == $npart) {
 		$end = $nfq1;
 	}
-	my $nrows = $end - $start + 1;
-
-	my $partfq1 = $prefix."_".$i."_1.fq";
-	my $partfq2 = $prefix."_".$i."_2.fq";
 	
-	`head -n $end $fq1 | tail -n $nrows > $partfq1`;
-	`head -n $end $fq2 | tail -n $nrows > $partfq2`;
+	push(@starts, $start);
+	push(@ends, $end);
+	push(@ids, $i);
 }
-=cut
+
+my $nfile = 0;
 my $count = 0;
+my $partfq1;
 open (IN, "<", $fq1) || die;
 while (<IN>) {
-	chomp;
-	if (/^\@/ and (($count % 4) == 0)) {
-		$count++;
-		if ($count>=$ARGV[1] and $count<=$ARGV[2]) {
-			print "$_\n";
+	$count++;
+	
+	# if the row number is larger than the end, do:
+	if ($count>$ends[$nfile]) {
+		close FQ1;
+		$nfile++; # go next
+	}
+	
+	# if the row number matches the start, do:
+	if ($count==$starts[$nfile]) {
+		my $id = $nfile + 1;
+		$partfq1 = $prefix."_".$id."_1.fq";
+		open(FQ1, ">", $partfq1) || die;
+	}
+
+	# if in the range, do:
+	if (($count>=$starts[$nfile]) and ($count<=$ends[$nfile])) {
+		if (/^\@/ and (($count % 4) == 1)) {
+			print FQ1 "$_";
 			for (my $i=0; $i<3; $i++) {
 				$_ = <IN>;
-				print "$_";
+				print FQ1 "$_";
+				$count++;
 			}
-		} elsif ($count>$ARGV[2]) {
-			last;
 		}
 	}
 }
 close IN;
+
+$nfile = 0;
+$count = 0;
+my $partfq2;
+open (IN, "<", $fq2) || die;
+while (<IN>) {
+	$count++;
+
+	# if the row number is larger than the end, do:
+	if ($count>$ends[$nfile]) {
+		close FQ2;
+		$nfile++; # go next
+	}
+	
+	# if the row number matches the start, do:
+	if ($count==$starts[$nfile]) {
+		my $id = $nfile + 1;
+		$partfq2 = $prefix."_".$id."_2.fq";
+		open(FQ2, ">", $partfq2) || die;
+	}
+
+
+	# if in the range, do:
+	if (($count>=$starts[$nfile]) and ($count<=$ends[$nfile])) {
+		if (/^\@/ and (($count % 4) == 1)) {
+			print FQ2 "$_";
+			for (my $i=0; $i<3; $i++) {
+				$_ = <IN>;
+				print FQ2 "$_";
+				$count++;
+			}
+		}
+	}
 }
+close IN;
+
