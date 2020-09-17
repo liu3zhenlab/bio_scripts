@@ -14,17 +14,21 @@ use fqpair;
 my $version = "0.1.0";
 
 my $insmean = 350;
-my $inssd = 200;
+my $inssd = 50;
+my $prefix = "kra";
+
 sub prompt {
 	print <<EOF;
 	Usage: perl k2readasm [options]
-	--kmer <file>  : k-mer list, one k-mer per line; required
-	--r1 <file>    : fastq file of read 1 of paired-end reads; required 
+	--kmer <file>  : k-mer list, one k-mer per line; required if no "--nolyasm"
+	--r1 <file>    : fastq file of read 1 of paired-end reads; required if no "--onlyasm" 
 	--r2 <file>    : fastq file of read 2 of paired-end reads; optional
 	--noasm        : only perform extraction of reads if specified; off by default
+	--onlyasm      : only perform assembly on the extracted reads; off by default
 	--insmean <num>: mean of insert lengths ($insmean)  
 	--inssd <num>  : standard deviation of insert lengths ($inssd)
-	--prefix <str> : prefix for output (kra)
+	--prefix <str> : prefix for output ($prefix)
+	--log <file>   : filename of logs ($prefix.0.log)
 	--help         : help information
 EOF
 exit;
@@ -34,11 +38,11 @@ exit;
 # parameters:
 ###############################################
 my %opts = ();
-my ($kmer, $r1, $r2, $prefix, $help);
+my ($kmer, $r1, $r2, $log, $help);
 
 &GetOptions(\%opts, "kmer=s", "r1=s", "r2=s",
-                    "noasm", "insmean=i", "inssd=i",
-					"prefix=s", "version", "help");
+                    "noasm", "onlyasm", "insmean=i", "inssd=i",
+					"prefix=s", "log=s", "version", "help");
 
 &prompt if exists $opts{help} or !%opts;
 
@@ -47,17 +51,27 @@ if (exists $opts{version}) {
 	exit;
 }
 
+if (!exists $opts{onlyasm} and (!exists $opts{kmer} or !exists $opts{r1})) {
+	print STDERR "this is not \"onlyasm\", --kmer and --r1 are required\n";
+}
+
 $kmer = $opts{kmer} if (exists $opts{kmer});
 $r1 = $opts{r1} if (exists $opts{r1});
 $r2 = $opts{r2} if (exists $opts{r2});
 $insmean = $opts{insmean} if (exists $opts{insmean});
 $inssd = $opts{inssd} if (exists $opts{inssd});
-
-if (exists $opts{prefix}) {
-	$prefix = $opts{prefix};
+$prefix = $opts{prefix} if (exists $opts{prefix});
+if (exists $opts{log}){
+	$log = $opts{log};
 } else {
-	$prefix = "kra";
+	$log = $prefix.".0.log";
 }
+
+if (exists $opts{noasm} and exists $opts{onlyasm}) {
+	print STDERR "--noasm and --onlyasm are excluded\n";
+	exit;
+}
+
 
 # utils
 my $scriptPath = $FindBin::Bin;
@@ -69,8 +83,7 @@ my $wgsPath = $scriptPath."/bin/wgs";
 # output
 ###############################################
 # log
-my $logfile = $prefix.".0.log";
-open(LOG, ">", $logfile) || die;
+open(LOG, ">", $log) || die;
 
 # kmer-readname table
 my $krn_out = $prefix.".1.kmer_readname"; # 3 cols: id, kmer, reads
@@ -93,31 +106,36 @@ if (!exists $opts{noasm}) {
 ###############################################
 my $fqout1 = $reads_prefix."_1.fq";
 my $fqout2 = $reads_prefix."_2.fq";
-if (exists $opts{r2}) {
-	kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1, $r2); 
-	`grep -f $rn_out $r1 -A 3 --no-group-separator > $fqout1`;
-	`grep -f $rn_out $r2 -A 3 --no-group-separator > $fqout2`;
+
+if (exists $opts{onlyasm}) {
+	runreport("k-mer to reads skipped")
+} else {
+	if (exists $opts{r2}) {
+		kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1, $r2); 
+		`grep -f $rn_out $r1 -A 3 --no-group-separator > $fqout1`;
+		`grep -f $rn_out $r2 -A 3 --no-group-separator > $fqout2`;
 	
-	# check if two data paired:
-	my $paired = fqpair::fqpair($fqout1, $fqout2);
-	if ($paired) {
-		runreport("Paird fastq were generated");
-		if (-z $fqout1) {
-			runreport("fastq is empty");
+		# check if two data paired:
+		my $paired = fqpair::fqpair($fqout1, $fqout2);
+		if ($paired) {
+			runreport("Paird fastq were generated");
+			if (-z $fqout1) {
+				runreport("fastq is empty");
+				exit;
+			}
+		} else {
+			runreport("Paird fastq generation failed");
 			exit;
 		}
 	} else {
-		runreport("Paird fastq generation failed");
-		exit;
-	}
-} else {
-	kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1);
-	`grep -f $rn_out $r1 -A 3 > $fqout1`;
-	if (! -z $fqout1) {
-		runreport("Single fastq were generated");
-	} else {
-		runreport("Single fastq were empty");
-		exit;
+		kmer2readname::kmer2rn($kmer, $krn_out, $rn_out, $r1);
+		`grep -f $rn_out $r1 -A 3 > $fqout1`;
+		if (! -z $fqout1) {
+			runreport("Single fastq were generated");
+		} else {
+			runreport("Single fastq were empty");
+			exit;
+		}
 	}
 }
 
@@ -142,6 +160,9 @@ if (exists $opts{noasm}) {
 	`rm $frg`;
 	runreport("Assembly was completed");
 }
+
+close LOG;
+
 ###############################################
 ## module 0: report running result
 #################################################
