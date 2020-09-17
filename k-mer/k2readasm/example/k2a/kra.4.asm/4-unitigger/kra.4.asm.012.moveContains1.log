@@ -1,0 +1,11 @@
+==> MOVE CONTAINS #1
+checkUnitigMembership()--  numfrags=510
+checkUnitigMembership()-- nutg=13 nfrg=509 lost=0 found=509
+checkUnitigMembership()-- log2 length histogram:
+checkUnitigMembership()--  5 (       32-       64) 0
+checkUnitigMembership()--  6 (       64-      128) 1
+checkUnitigMembership()--  7 (      128-      256) 4
+checkUnitigMembership()--  8 (      256-      512) 8
+MATE HAPPINESS (dove/dove):  unmated           0  mated         223  sameTig: happy           0 grumpy           0  diffTig: end-end           0 end-int           0 int-int         223
+MATE HAPPINESS (dove/cont):  unmated           1  mated         211  sameTig: happy           0 grumpy           0  diffTig: end-end           0 end-int           0 int-int         211
+MATE HAPPINESS (cont/cont):  unmated           0  mated          72  sameTig: happy           0 grumpy           0  diffTig: end-end           0 end-int           0 int-int          72

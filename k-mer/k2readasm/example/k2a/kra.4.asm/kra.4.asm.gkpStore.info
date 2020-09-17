@@ -1,0 +1,4 @@
+libIID	bgnIID	endIID	active	deleted	mated	totLen	clrLen	libName
+0	1	510	510	0	510	76500	76500	GLOBAL
+0	0	0	0	0	0	0	0	LegacyUnmatedReads
+1	1	510	510	0	510	76500	76500	kra.4.asm

@@ -1,0 +1,12 @@
+Checking library kra.4.asm for duplicates.
+duplicateFrags:    0
+duplicateMates:    0
+duplicateSelf:     0
+
+
+Duplicate Mate Overlap Types
+	~a~b	a~b	~ab	ab
+~a~b	6768	3	5	25
+a~b	1	0	0	0
+~ab	3	0	0	0
+ab	41	0	0	0

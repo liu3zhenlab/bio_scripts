@@ -1,0 +1,9 @@
+Closing the new store:
+ovs->ovs.ovsMagic           = 0x65726f74536c766f
+ovs->ovs.ovsVersion         = 2
+ovs->ovs.numOverlapsPerFile = 67108864
+ovs->ovs.smallestIID        = 1
+ovs->ovs.largestIID         = 510
+ovs->ovs.numOverlapsTotal   = 27368
+ovs->ovs.highestFileIndex   = 1
+ovs->ovs.maxReadLenInBits   = 18

@@ -1,0 +1,23 @@
+CA version 8.3rc2 ($Id: BuildUnitigs.C 4371 2013-08-01 17:19:47Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/buildUnitigs \
+  -O /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.ovlStore \
+  -G /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -T /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.tigStore \
+  -B 75000 \
+  -e 0.015 \
+  -E 2.5 \
+  -b \
+  -m 7 \
+  -U \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm

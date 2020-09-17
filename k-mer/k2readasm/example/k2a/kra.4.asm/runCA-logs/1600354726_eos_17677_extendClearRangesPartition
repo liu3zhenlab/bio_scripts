@@ -1,0 +1,19 @@
+CA version 8.3rc2 ($Id: eCR-partition.C 4371 2013-08-01 17:19:47Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-3-ECR
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/extendClearRangesPartition \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -t /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.tigStore \
+  -n 12 \
+  -c kra.4.asm \
+  -N 4 \
+  -p /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-3-ECR/extendClearRanges.partitionInfo

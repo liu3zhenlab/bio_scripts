@@ -1,0 +1,18 @@
+CA version 8.3rc2 ($Id: overlapStoreBuild.C 4550 2014-07-31 13:56:46Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/overlapStoreBuild \
+  -dup \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.dupStore.BUILDING \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -M 1024 \
+  -L /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.dupStore.list

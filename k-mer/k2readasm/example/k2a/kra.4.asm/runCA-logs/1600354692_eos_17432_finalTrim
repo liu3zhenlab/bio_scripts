@@ -1,0 +1,18 @@
+CA version 8.3rc2 ($Id: finalTrim.C 4571 2014-10-09 13:18:54Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/finalTrim \
+  -G /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -O /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.obtStore \
+  -e 0.015 \
+  -E 2.5 \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.finalTrim

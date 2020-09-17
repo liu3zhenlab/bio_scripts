@@ -1,0 +1,18 @@
+Fragments trimmed using:
+  alreadyDeleted   0
+  noTrimming       0
+  merBased         510
+  flowBased        0
+  qualityBased     0
+Fragments trimmed using:
+  NOLIBRARY        0
+Trimming result:
+ no vector clear range known:  0 (trimed to quality clear)
+ no HQ non-vector sequence:    0 (deleted)
+ HQ vector trimmed:            0 (trimmed to intersection)
+     5' end:                   0
+     3' end:                   0
+ LQ vector trimmed:            0 (trimmed to intersection)
+     5' end:                   0
+     3' end:                   0
+ final clear range too short:  0 (deleted)

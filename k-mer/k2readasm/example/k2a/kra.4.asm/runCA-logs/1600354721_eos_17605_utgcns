@@ -1,0 +1,16 @@
+CA version 8.3rc2 ($Id: utgcns.C 4518 2014-03-31 20:11:04Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/utgcns \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -t /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.tigStore 1 001 \
+  -maxcoverage 0

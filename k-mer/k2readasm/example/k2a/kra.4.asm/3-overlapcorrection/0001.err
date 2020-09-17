@@ -1,0 +1,10 @@
+Quality Threshold = 1.50%
+Starting Read_Frags ()
+Starting Correct_Frags ()
+Starting Read_Olaps ()
+Starting qsort ()
+Starting Redo_Olaps ()
+Starting re-sort
+Saving corrected error rates to file /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/3-overlapcorrection/0001.erate.WORKING
+0/27368 failed/total alignments (0.0%)
+Finished

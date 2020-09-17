@@ -1,0 +1,31 @@
+
+Bubble popping        = on
+Intersection breaking = on
+Bad mate threshold    = -7
+Error threshold       = 0.015 (1.500%)
+Error limit           = 2.500 errors
+
+sizeof(ufPath)        = 24
+
+FragmentInfo()-- Loaded 509 alive fragments, skipped 1 dead fragments.
+FragmentInfo()-- Saving fragment information to cache '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.fragmentInfo'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.001.bestoverlapgraph-containments.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.002.bestoverlapgraph-dovetails.log'
+BestOverlapGraph()-- Saving overlap graph to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.bog'.
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.003.ChunkGraph.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.004.buildUnitigs.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.005.bubblePopping.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.006.intersectionBreaking.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.007.placeContains.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.008.placeZombies.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.009.bubblePopping.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.010.libraryStats.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.011.evaluateMates.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.012.moveContains1.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.013.splitDiscontinuous1.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.014.splitBadMates.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.015.splitDiscontinuous2.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.016.moveContains2.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.017.splitDiscontinuous3.log'
+setLogFile()-- Now logging to '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/4-unitigger/kra.4.asm.018.output.log'
+Bye.

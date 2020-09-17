@@ -1,0 +1,30 @@
+READS (= ACEEPTED + TRIMMED + DELETED)
+  total processed       508
+
+ACCEPTED
+  no coverage           0
+  full coverage         361
+  no signal, no gaps    146
+  no signal, gaps       0
+  gap spanned by mate   0
+
+TRIMMED
+  both                  0
+  chimera               0
+  spur                  1
+
+DELETED
+  both                  0
+  chimera               0
+  spur                  0
+
+SPUR TYPES (= TRIMMED/DELETED spur + both)
+  normal                1
+  linker                0
+
+CHIMERA TYPES (= TRIMMED/DELETED chimera + both)
+  innie pair            0
+  overhang              0
+  gap                   0
+  gap (no mate)         0
+  linker                0

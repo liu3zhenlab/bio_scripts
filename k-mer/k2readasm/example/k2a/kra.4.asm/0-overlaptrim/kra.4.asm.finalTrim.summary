@@ -1,0 +1,4 @@
+Overlap error rate     <= 1.50% error
+Overlap error limit    <= 2.50 errors
+Overlap min overlap    >= 40 bases (for 'largest covered')
+Overlap min coverage   >= 1 read (for 'largest covered')

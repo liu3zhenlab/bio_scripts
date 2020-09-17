@@ -1,0 +1,14 @@
+tigID	rho	covStat	arrDist
+unitig 0 not unique -- length 177 too short, need to be at least 1000
+unitig 1 not unique -- coverage stat -17, needs to be at least 1.000000
+unitig 2 not unique -- coverage stat -21, needs to be at least 1.000000
+unitig 3 not unique -- coverage stat -19, needs to be at least 1.000000
+unitig 4 not unique -- length 297 too short, need to be at least 1000
+unitig 5 not unique -- length 303 too short, need to be at least 1000
+unitig 6 not unique -- length 285 too short, need to be at least 1000
+unitig 7 not unique -- length 253 too short, need to be at least 1000
+unitig 8 not unique -- length 259 too short, need to be at least 1000
+unitig 9 not unique -- length 237 too short, need to be at least 1000
+unitig 10 not unique -- singleton
+unitig 11 not unique -- coverage stat -6, needs to be at least 1.000000
+unitig 12 not unique -- singleton

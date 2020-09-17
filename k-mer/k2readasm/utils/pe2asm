@@ -39,8 +39,8 @@ if [ -z $fq1 ] || [ -z $fq2 ] || [ -z $outpath ] || [ -z $name ]; then
 	usage;
 	exit;
 fi
-if [ -z $insert_mean ]; then insert_mean=300; fi
-if [ -z $insert_var ]; then insert_var=150; fi
+if [ -z $insert_mean ]; then insert_mean=350; fi
+if [ -z $insert_var ]; then insert_var=50; fi
 if [ -z $tech ]; then tech=illumina; fi
 if [ -z $qtype ]; then qtype=sanger; fi
 

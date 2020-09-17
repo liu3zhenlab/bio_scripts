@@ -1,0 +1,20 @@
+CA version 8.3rc2 ($Id: merTrim.C 4523 2014-04-11 20:07:55Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/merTrim \
+  -b 1 \
+  -e 510 \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -t 4 \
+  -m 22 \
+  -mc /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-mercounts/kra.4.asm-C-ms22-cm0 \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-mertrim/kra.4.asm.0001.merTrim.WORKING

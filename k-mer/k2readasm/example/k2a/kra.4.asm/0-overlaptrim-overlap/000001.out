@@ -1,0 +1,53 @@
+
+STRING_NUM_BITS       31
+OFFSET_BITS           31
+STRING_NUM_MASK       2147483647
+OFFSET_MASK           2147483647
+MAX_STRING_NUM        2147483647
+
+Hash_Mask_Bits        22
+Max_Hash_Strings      510
+Max_Hash_Data_Len     75604
+Max_Hash_Load         0.750000
+Kmer Length           22
+Min Overlap Length    40
+MAX_ERRORS            15729
+ERRORS_FOR_FREE       1
+
+Num_PThreads          2
+Max_Reads_Per_Batch   510
+Max_Reads_Per_Thread  63
+
+HASH_TABLE_SIZE         4194304
+sizeof(Hash_Bucket_t)   216
+hash table size:        864 MB
+
+check  16 MB
+info   0 MB
+start  0 MB
+
+Initialize_Work_Area:  MAX_ERRORS=15729  allocated 1MB
+Initialize_Work_Area:  MAX_ERRORS=15729  allocated 1MB
+Build_Hash_Index from 1 to 510
+HASH LOADING STOPPED: strings           510 out of          510 max.
+HASH LOADING STOPPED: length          75604 out of        75604 max.
+HASH LOADING STOPPED: entries          6293 out of     66060288 max (load 0.01).
+### realloc  Extra_Ref_Space  max_extra_ref_ct = 61796
+String_Ct = 510  Extra_String_Ct = 0  Extra_String_Subcount = 11915
+Read 4 kmers to mark to skip
+Index built.
+Starting 1 510
+Choose_And_Process_Stream_Segment()-- tid 0
+Choose_And_Process_Stream_Segment()-- tid 1
+WorkArea 0 allocates space 0 of size 16777216 for array 0 through 4092
+WorkArea 1 allocates space 0 of size 16777216 for array 0 through 4092
+Choose_And_Process_Stream_Segment()-- tid 0 returns
+Choose_And_Process_Stream_Segment()-- tid 1 returns
+ Kmer hits without olaps = 1936
+    Kmer hits with olaps = 13911
+  Multiple overlaps/pair = 0
+ Total overlaps produced = 13905
+      Contained overlaps = 0
+       Dovetail overlaps = 0
+Rejected by short window = 0
+ Rejected by long window = 0

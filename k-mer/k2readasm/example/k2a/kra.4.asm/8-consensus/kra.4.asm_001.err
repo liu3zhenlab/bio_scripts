@@ -1,0 +1,24 @@
+Working on contig 0 (1 unitigs and 13 fragments)
+Working on contig 1 (1 unitigs and 79 fragments)
+Working on contig 2 (1 unitigs and 71 fragments)
+Working on contig 3 (1 unitigs and 68 fragments)
+Working on contig 4 (1 unitigs and 42 fragments)
+Working on contig 5 (1 unitigs and 37 fragments)
+Working on contig 6 (1 unitigs and 36 fragments)
+Working on contig 7 (1 unitigs and 28 fragments)
+Working on contig 8 (1 unitigs and 30 fragments)
+Working on contig 9 (1 unitigs and 28 fragments)
+Working on contig 11 (1 unitigs and 75 fragments)
+
+NumColumnsInUnitigs             = 2953
+NumGapsInUnitigs                = 0
+NumRunsOfGapsInUnitigReads      = 0
+NumColumnsInContigs             = 2953
+NumGapsInContigs                = 0
+NumRunsOfGapsInContigReads      = 0
+NumAAMismatches                 = 2
+NumVARRecords                   = 0
+NumVARStringsWithFlankingGaps   = 0
+NumUnitigRetrySuccess           = 0
+
+Consensus finished successfully.  Bye.

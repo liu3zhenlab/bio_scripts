@@ -1,0 +1,10 @@
+LIB 1 350.000000 +- 50.000000
+minLength = 600
+minSplit = 100
+Analyzing unitig for b=0 to e=13
+nShort      13
+nTested     0
+nSplit      0
+nCreated    0
+nCreatedMin 4294967295
+nCreatedMax 0

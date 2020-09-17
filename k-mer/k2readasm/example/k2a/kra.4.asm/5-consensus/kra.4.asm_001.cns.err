@@ -1,0 +1,36 @@
+Computing unitig consensus for b=0 to e=13
+Working on unitig 0 of length 177 (0 unitigs 13 fragments)
+  unitig 0 detected 6 contains (4.34x, 42.45%) 7 dovetail (5.88x, 57.55%)
+Working on unitig 1 of length 268 (0 unitigs 79 fragments)
+  unitig 1 detected 31 contains (16.18x, 37.59%) 48 dovetail (26.87x, 62.41%)
+Working on unitig 2 of length 265 (0 unitigs 71 fragments)
+  unitig 2 detected 24 contains (13.30x, 33.35%) 47 dovetail (26.59x, 66.65%)
+Working on unitig 3 of length 262 (0 unitigs 68 fragments)
+  unitig 3 detected 26 contains (14.52x, 37.66%) 42 dovetail (24.04x, 62.34%)
+Working on unitig 4 of length 297 (0 unitigs 42 fragments)
+  unitig 4 detected 12 contains (4.79x, 24.02%) 30 dovetail (15.14x, 75.98%)
+Working on unitig 5 of length 303 (0 unitigs 37 fragments)
+  unitig 5 detected 13 contains (4.75x, 28.56%) 24 dovetail (11.88x, 71.44%)
+Working on unitig 6 of length 285 (0 unitigs 36 fragments)
+  unitig 6 detected 14 contains (5.96x, 34.04%) 22 dovetail (11.54x, 65.96%)
+Working on unitig 7 of length 253 (0 unitigs 28 fragments)
+  unitig 7 detected 9 contains (3.86x, 25.53%) 19 dovetail (11.26x, 74.47%)
+Working on unitig 8 of length 259 (0 unitigs 30 fragments)
+  unitig 8 detected 13 contains (5.92x, 37.64%) 17 dovetail (9.81x, 62.36%)
+Working on unitig 9 of length 237 (0 unitigs 28 fragments)
+  unitig 9 detected 15 contains (6.55x, 44.32%) 13 dovetail (8.23x, 55.68%)
+Working on unitig 11 of length 347 (0 unitigs 75 fragments)
+  unitig 11 detected 16 contains (6.87x, 21.22%) 59 dovetail (25.50x, 78.78%)
+
+NumColumnsInUnitigs             = 9534
+NumGapsInUnitigs                = 0
+NumRunsOfGapsInUnitigReads      = 0
+NumColumnsInContigs             = 0
+NumGapsInContigs                = 0
+NumRunsOfGapsInContigReads      = 0
+NumAAMismatches                 = 0
+NumVARRecords                   = 0
+NumVARStringsWithFlankingGaps   = 0
+NumUnitigRetrySuccess           = 0
+
+Consensus finished successfully.  Bye.

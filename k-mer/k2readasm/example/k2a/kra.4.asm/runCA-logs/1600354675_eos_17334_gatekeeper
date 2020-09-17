@@ -1,0 +1,16 @@
+CA version 8.3rc2 ($Id: AS_GKP_main.C 4640 2015-04-21 00:12:47Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/gatekeeper \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore.BUILDING \
+  -T \
+  -F /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm.frg

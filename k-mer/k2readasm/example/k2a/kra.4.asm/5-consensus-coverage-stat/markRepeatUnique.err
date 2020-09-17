@@ -1,0 +1,22 @@
+Command Line options:
+  singleReadMaxCoverage    1.000000
+  lowCoverage              2 coverage 1.000000 fraction
+  minReads                 2
+  tooLong                  4294967295
+  tooShort                 1000
+Loading fragment data.
+Generating statistics.
+Analyzing statistics.
+Processing unitigs.
+
+
+classification     number of unitigs    total length
+  unique:                          0               0
+  singleton:                       2             225
+  repeat:                         11            2953
+    too few reads:                 0               0
+    low cov stat:                  4            1142
+    too short:                     7            1811
+    microhet:                      0               0
+    spanning read:                 0               0
+    low coverage:                  0               0

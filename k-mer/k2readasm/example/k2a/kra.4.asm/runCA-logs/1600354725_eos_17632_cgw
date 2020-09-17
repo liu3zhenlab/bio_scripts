@@ -1,0 +1,29 @@
+CA version 8.3rc2 ($Id: AS_CGW_main.C 4557 2014-08-11 12:24:27Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/cgw \
+  -j 1 \
+  -k 5 \
+  -r 5 \
+  -s 2 \
+  -filter 1 \
+  -minmergeweight 2 \
+  -S 0 \
+  -G \
+  -z \
+  -B 75000 \
+  -shatter 0 \
+  -missingMate 0 \
+  -m 100 \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -t /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.tigStore \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm

@@ -1,0 +1,19 @@
+CA version 8.3rc2 ($Id: overlap_partition.C 4477 2013-12-02 17:41:49Z skoren $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/overlap_partition \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -bl 100000000 \
+  -bs 0 \
+  -rs 2000000 \
+  -rl 0 \
+  -o /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim-overlap

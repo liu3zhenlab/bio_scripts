@@ -1,0 +1,7 @@
+opening gkStore '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore'
+Guessed X coverage is 18
+Use minCorrect=6 minVerified=4
+not searching for adapter.
+loading genome mer database from meryl '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-mercounts/kra.4.asm-C-ms22-cm0'.
+
+Success!  Bye.

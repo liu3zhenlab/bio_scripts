@@ -1,0 +1,86 @@
+Using up to 8 OpenMP threads.
+Beginning ckp01-INI (loaded ckp00-NUL).
+Reading fragments.
+Reading unitigs.
+ResizeEdgeList()-- sizing list for 'c' to 18 (currently 0)
+Checking sanity of loaded fragments.
+* Loaded dist kra.4.asm,1 (350 +/- 50)
+ComputeMatePairStatisticsRestricted()-- LIB IID 1 distance 0.00 0.00 -- only 0 samples, can't reestimate
+Beginning ckp02-EDG (loaded ckp00-NUL).
+BuildGraphEdgesDirectly()--
+BuildGraphEdgesDirectly()-- Found 509 fragments
+BuildGraphEdgesDirectly()-- Found 0/0 BacEnd pairs Unique-Unique
+BuildGraphEdgesDirectly()-- Found 508/508 (100.00%) mate pairs node external
+ComputeOverlaps()--
+ComputeOverlaps()-- removed 0 duplicate edges.
+ComputeOverlaps()-- took 0 seconds, found 2 edges (22.22%).
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+BuildInitialContigs()-- converting 13 unitigs with 265 edges to contigs.
+ResizeEdgeList()-- sizing list for 'C' to 42 (currently 0)
+BuildInitialContigs()-- converted 9 merged edges with 252 raw edges; skipped 252 raw edges in merged edges; converted 4 top level raw edges.
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.6 (logical ckp02-EDG) after building edges at Thu Sep 17 09:58:45 2020
+Beginning ckp03-SCF-partial (loaded ckp00-NUL).
+BuildUniqueCIScaffolds()-- with 1 threads out of 8 max.
+* AddScaffoldInferredEdges   scaffolds = 0
+MarkRedundantUniqueToUniqueEdges()--
+MarkTwoHopConfirmedEdgesOMP()-- working on 0 nodes, with 8 threads.
+MarkPathRemovedEdgesOMP()-- working on 0 nodes, with 8 threads.
+BuildUniqueCIScaffolds()-- After iteration 1, found 0 shaky contigs.
+* AddScaffoldInferredEdges   scaffolds = 0
+MarkRedundantUniqueToUniqueEdges()--
+MarkTwoHopConfirmedEdgesOMP()-- working on 0 nodes, with 8 threads.
+MarkPathRemovedEdgesOMP()-- working on 0 nodes, with 8 threads.
+*** Inititializing scaffold instrumenter bookkeeping, but graph has no live scaffolds! ***
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+Beginning ckp04-SCF (loaded ckp00-NUL).
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+** Running Level 1 Repeat Rez **
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+**** AFTER repeat rez ****
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.7 (logical ckp04-SCF) after initial scaffolding at Thu Sep 17 09:58:45 2020
+Beginning ckp06-1SM (loaded ckp00-NUL).
+MergeScaffoldsAggressive()-- begins.  minWeightToMerge=2
+*** Inititializing scaffold instrumenter bookkeeping, but graph has no live scaffolds! ***
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+MergeScaffoldsAggressive()-- No additional scaffold merging is possible.
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.8 (logical ckp06-1SM) after 1st scaffold merge at Thu Sep 17 09:58:45 2020
+Beginning ckp07-AS (loaded ckp00-NUL).
+# Considered 0 scaffolds of which 0 were single and 0 (0%) were demoted
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.9 (logical ckp07-AS) after stone throwing at Thu Sep 17 09:58:45 2020
+Beginning ckp09-2SM (loaded ckp00-NUL).
+MergeScaffoldsAggressive()-- begins.  minWeightToMerge=2
+*** Inititializing scaffold instrumenter bookkeeping, but graph has no live scaffolds! ***
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+MergeScaffoldsAggressive()-- No additional scaffold merging is possible.
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.10 (logical ckp09-2SM) after 2nd scaffold merge at Thu Sep 17 09:58:45 2020
+Beginning ckp10-FR (loaded ckp00-NUL).
+Threw additional 0 rocks on iter 0
+Beta - LeastSquaresGapEstimates #1 after final rocks
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.11 (logical ckp10-FR) after final rocks at Thu Sep 17 09:58:45 2020
+Beginning ckp11-PS (loaded ckp00-NUL).
+Beta - LeastSquaresGapEstimates #2 after partial stones
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+Threw 0 partial stones
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.12 (logical ckp11-PS) after partial stones at Thu Sep 17 09:58:45 2020
+Beginning ckp12-FCS (loaded ckp00-NUL).
+Threw 0 contained stones
+**** Finished Final Contained Stones level 2 ****
+Beta - LeastSquaresGapEstimates #3 after contained stones
+RemoveSurrogateDuplicates()--
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/6-clonesize/kra.4.asm.ckp.13 (logical ckp12-FCS) after final contained stones at Thu Sep 17 09:58:45 2020
+Beginning ckp13-FC (loaded ckp00-NUL).
+* CleanupFailedMergesInScaffolds
+Beginning ckp14-RS (loaded ckp00-NUL).
+ComputeMatePairStatisticsRestricted()-- LIB IID 1 distance 0.00 0.00 -- only 0 samples, can't reestimate
+ComputeMatePairStatisticsRestricted()-- LIB IID 1 distance 0.00 0.00 -- only 0 samples, can't reestimate
+**** GenerateCIGraph_U_Stats ****
+*** Links confirmed by cgbOlaps 0  onCGBOlaps 0
+* Stones: 0  Walks:0
+* Bye *

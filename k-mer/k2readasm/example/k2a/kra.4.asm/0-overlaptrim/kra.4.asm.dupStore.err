@@ -1,0 +1,25 @@
+Scanning overlap files to count the number of overlaps.
+Found 0.028 million overlaps.
+Memory limit 1024MB supplied.  I'll put 986058 IIDs (53.69 million overlaps) into each of 1 buckets.
+Reading gatekeeper to build a map from fragment ID to library ID.
+Marking fragments to skip deduplication.
+Marked 1 fragments.
+bucketizing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim-overlap/001/000001.ovb.gz
+bucketizing DONE!
+overlaps skipped:
+               0 OBT - low quality
+           10696 DUP - non-duplicate overlap
+               0 DUP - different library
+               0 DUP - dedup not requested
+reading /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.dupStore.BUILDING/tmp.sort.000 (0)
+sorting /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.dupStore.BUILDING/tmp.sort.000 (0)
+writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/0-overlaptrim/kra.4.asm.dupStore.BUILDING/tmp.sort.000 (0)
+Closing the new store:
+ovs->ovs.ovsMagic           = 0x65726f74536c766f
+ovs->ovs.ovsVersion         = 2
+ovs->ovs.numOverlapsPerFile = 67108864
+ovs->ovs.smallestIID        = 1
+ovs->ovs.largestIID         = 510
+ovs->ovs.numOverlapsTotal   = 6430
+ovs->ovs.highestFileIndex   = 1
+ovs->ovs.maxReadLenInBits   = 18

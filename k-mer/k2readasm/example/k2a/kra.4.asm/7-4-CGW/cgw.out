@@ -1,0 +1,86 @@
+Using up to 8 OpenMP threads.
+Skipping ckp01-INI (loaded ckp03-SCF-partial).
+Skipping ckp02-EDG (loaded ckp03-SCF-partial).
+LoadScaffoldGraphFromCheckpoint()--  Loading checkpoint '/homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.12' at Thu Sep 17 09:58:46 2020
+LoadScaffoldGraphFromCheckpoint()--  Loading reads and dists.
+LoadScaffoldGraphFromCheckpoint()--  Loading unitigs.
+LoadScaffoldGraphFromCheckpoint()--  Loading contigs.
+LoadScaffoldGraphFromCheckpoint()--  Loading scaffolds.
+LoadScaffoldGraphFromCheckpoint()--  Loading chunk overlaps.
+LoadScaffoldGraphFromCheckpoint()--  Rebuilding unitig edges.
+ResizeEdgeList()-- sizing list for 'c' to 42 (currently 0)
+RebuildGraphEdges()-- Rebuilding 265 edges in 13 unitigs.
+LoadScaffoldGraphFromCheckpoint()--  Rebuilding contig edges.
+ResizeEdgeList()-- sizing list for 'C' to 42 (currently 0)
+RebuildGraphEdges()-- Rebuilding 265 edges in 13 contigs.
+LoadScaffoldGraphFromCheckpoint()--  Rebuilding scaffold edges.
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+RebuildGraphEdges()-- Rebuilding 0 edges in 0 scaffolds.
+* ScaffoldGraph Memory Report:
+*	     	numElements	AllocatedElements	AllocatedSize
+VA        128 bytes; elements:          2 active;          2 allocated;    64 bytes; 'Dists'
+VA      49056 bytes; elements:        511 active;        511 allocated;    96 bytes; 'CIFrags'
+VA       2184 bytes; elements:         13 active;         13 allocated;   168 bytes; 'CIs    '
+VA      25440 bytes; elements:        265 active;        265 allocated;    96 bytes; 'CIEdges'
+VA       2184 bytes; elements:         13 active;         13 allocated;   168 bytes; 'Contigs    '
+VA      25440 bytes; elements:        265 active;        265 allocated;    96 bytes; 'ConEdges'
+VA          0 bytes; elements:          0 active;          0 allocated;   168 bytes; 'Scaffolds'
+VA          0 bytes; elements:          0 active;          0 allocated;    96 bytes; 'SEdges'
+*	TotalMemorySize = 104432
+Skipping ckp03-SCF-partial (loaded ckp03-SCF-partial).
+Beginning ckp04-SCF (loaded ckp03-SCF-partial).
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+** Running Level 1 Repeat Rez **
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+**** Calling CheckEdgesAgainstOverlapper ****
+**** Survived CheckEdgesAgainstOverlapper with 0 failures****
+**** AFTER repeat rez ****
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.13 (logical ckp04-SCF) after initial scaffolding at Thu Sep 17 09:58:46 2020
+Beginning ckp06-1SM (loaded ckp03-SCF-partial).
+MergeScaffoldsAggressive()-- begins.  minWeightToMerge=2
+*** Inititializing scaffold instrumenter bookkeeping, but graph has no live scaffolds! ***
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+MergeScaffoldsAggressive()-- No additional scaffold merging is possible.
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.14 (logical ckp06-1SM) after 1st scaffold merge at Thu Sep 17 09:58:46 2020
+Beginning ckp07-AS (loaded ckp03-SCF-partial).
+# Considered 0 scaffolds of which 0 were single and 0 (0%) were demoted
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.15 (logical ckp07-AS) after stone throwing at Thu Sep 17 09:58:46 2020
+Beginning ckp09-2SM (loaded ckp03-SCF-partial).
+MergeScaffoldsAggressive()-- begins.  minWeightToMerge=2
+*** Inititializing scaffold instrumenter bookkeeping, but graph has no live scaffolds! ***
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+MergeScaffoldsAggressive()-- No additional scaffold merging is possible.
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.16 (logical ckp09-2SM) after 2nd scaffold merge at Thu Sep 17 09:58:46 2020
+Beginning ckp10-FR (loaded ckp03-SCF-partial).
+Threw additional 0 rocks on iter 0
+Beta - LeastSquaresGapEstimates #1 after final rocks
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.17 (logical ckp10-FR) after final rocks at Thu Sep 17 09:58:46 2020
+Beginning ckp11-PS (loaded ckp03-SCF-partial).
+Beta - LeastSquaresGapEstimates #2 after partial stones
+ResizeEdgeList()-- sizing list for 'S' to 16 (currently 0)
+Threw 0 partial stones
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.18 (logical ckp11-PS) after partial stones at Thu Sep 17 09:58:46 2020
+Beginning ckp12-FCS (loaded ckp03-SCF-partial).
+Threw 0 contained stones
+**** Finished Final Contained Stones level 2 ****
+Beta - LeastSquaresGapEstimates #3 after contained stones
+RemoveSurrogateDuplicates()--
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.19 (logical ckp12-FCS) after final contained stones at Thu Sep 17 09:58:46 2020
+Beginning ckp13-FC (loaded ckp03-SCF-partial).
+* CleanupFailedMergesInScaffolds
+Beginning ckp14-RS (loaded ckp03-SCF-partial).
+resolveSurrogates()--  Allocating 128 vectors.
+Placed 0 surrogate fragments out of 0 surrogate fragments
+resolveSurrogates()--  Allocating 128 vectors.
+Placed 0 surrogate fragments out of 0 surrogate fragments
+Beta - LeastSquaresGapEstimates #5 after resolve surrogates
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.20 (logical ckp14-RS) after resolve surrogates at Thu Sep 17 09:58:46 2020
+ComputeMatePairStatisticsRestricted()-- LIB IID 1 distance 0.00 0.00 -- only 0 samples, can't reestimate
+ComputeMatePairStatisticsRestricted()-- LIB IID 1 distance 0.00 0.00 -- only 0 samples, can't reestimate
+**** GenerateCIGraph_U_Stats ****
+*** Links confirmed by cgbOlaps 0  onCGBOlaps 0
+* Stones: 0  Walks:0
+====> Writing /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/7-4-CGW/kra.4.asm.ckp.21 (logical ckp15-FIN) after output at Thu Sep 17 09:58:46 2020
+* Bye *

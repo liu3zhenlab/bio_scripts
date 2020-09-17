@@ -1,0 +1,18 @@
+distinct: 6080
+unique:   2923
+total:    65661
+distinct: 6080
+unique:   2923
+total:    65661
+Xcoverage zero 1 0 2923
+Xcoverage drop 2 2923 211
+Xcoverage drop 3 211 205
+Xcoverage drop 4 205 136
+Xcoverage drop 5 136 95
+Xcoverage incr 6 95 113
+Xcoverage incr 13 113 120
+Xcoverage incr 14 120 124
+Xcoverage incr 18 124 141
+Guessed X coverage is 18
+Set maxCount to 71, which will cover 99.21% of distinct mers and 97.07% of all mers.
+Reset maxCount to 77, which will cover 99.87% of distinct mers and 99.50% of all mers.

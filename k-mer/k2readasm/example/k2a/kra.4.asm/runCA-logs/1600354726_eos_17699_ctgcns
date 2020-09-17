@@ -1,0 +1,16 @@
+CA version 8.3rc2 ($Id: ctgcns.C 4465 2013-11-04 19:40:29Z brianwalenz $).
+
+Error Rates:
+AS_OVL_ERROR_RATE 0.060000
+AS_CNS_ERROR_RATE 0.060000
+AS_CGW_ERROR_RATE 0.100000
+AS_MAX_ERROR_RATE 0.400000
+
+Current Working Directory:
+/homes/liu3zhen/scripts2/k2readasm/example/k2a
+
+Command:
+/homes/liu3zhen/scripts2/k2readasm/Linux-amd64/bin/ctgcns \
+  -g /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.gkpStore \
+  -t /homes/liu3zhen/scripts2/k2readasm/example/k2a/kra.4.asm/kra.4.asm.tigStore 21 001 \
+  -P 0
