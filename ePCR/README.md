@@ -41,7 +41,7 @@ perl primer.ePCR.pl -p $pfas -r $ref \
   1>${prefix}.txt 2>${prefix}.log
 ```
 
-In the [output](primer.onRef.txt), each pair islabeled to be uniquely or multiply mapped and the amplicon information is provided.
+In the [output](out.txt), each pair islabeled to be uniquely or multiply mapped and the amplicon information is provided.
 ```
 unique	pf1	AATTTTCGATCGATGCCTTG	0	+	ctg_1	888	pr1	GGGAATCCTCCCCTTCAATA	0	-	ctg_1	1125	238
 multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	2485	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	2713	229
