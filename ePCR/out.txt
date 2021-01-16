@@ -1,0 +1,12 @@
+# primer.ePCR.pl version=0.2
+# primer fasta file is primers.fas
+# base name of bowtie index files is refdb
+# PCR maximum size allowed is 10000
+# Maximum mismatches allowed is 3
+# note the penalty 2 was used for the first 3 bases at 3' end
+# bowtie -p 4 -B 1 -n 1 -y -v 2 -a -l 10 -f --best --quiet --sam-nohead refdb primers.fas > tempypyaR.aln.tmp
+Hit	fPname	fPrimer	fMismatch	fOri	fChr	fPos	rPname	rPrimer	rMismatch	rOri	rChr	rPos	PCRsize
+unique	pf1	AATTTTCGATCGATGCCTTG	0	+	ctg_1	888	pr1	GGGAATCCTCCCCTTCAATA	0	-	ctg_1	1125	238
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	2485	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	2713	229
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	665	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	2713	2049
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	665	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	893	229

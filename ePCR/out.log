@@ -1,0 +1,14 @@
+o 2021-01-16 11:40:51
+  Performing alignment.
+# reads processed: 4
+# reads with at least one reported alignment: 4 (100.00%)
+# reads that failed to align: 0 (0.00%)
+Reported 6 alignments
+o 2021-01-16 11:40:51
+  Alignment completed.
+o 2021-01-16 11:40:51
+  Read primer alignments.
+o 2021-01-16 11:40:51
+  Match primers based on aligned positions.
+o 2021-01-16 11:40:51
+  Output primer pairs.
