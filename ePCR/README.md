@@ -7,8 +7,8 @@ The script takes a fasta file of primers and aligns each to a reference genome f
 [bowtie](http://bowtie-bio.sourceforge.net)
 
 ### Data requirement
-1. a primer fasta file, see example in [primer.fas](primer.fas)
-2. a fasta file of a reference
+1. a primer fasta file, see an example in [primers.fas](primers.fas)
+2. a fasta file of a reference, see an example in [ref.fas](ref.fas)
 
 ### Usage
 ```
@@ -24,32 +24,30 @@ Options:
 ```
 
 ### Example
-Here is an example that shows how to check primers in [primer.fas](primer.fas) on a reference genome.
+Here is an example that shows how to check primers in [primers.fas](primers.fas) on the [reference](ref.fas) .
 
 First, the reference genome needs to be indexed.
 ```
-bowtie-build <path-to-reference_fasta> <path-to-bowtie-database>
+bowtie-build ref.fas refdb
 ```
 
-Second, run the script with the inputs and a primer fasta file and a Bowtie indexed database (e.g., <path-to-bowtie-database>) 
+Second, run the script with the inputs and a primer fasta file and a Bowtie indexed database
 ```
 #!/bin/bash
-pfas=primer.fas
-ref=<path-to-bowtie-database>
-prefix=primer.onRef
+pfas=primers.fas
+ref=refdb
+prefix=out
 perl primer.ePCR.pl -p $pfas -r $ref \
   1>${prefix}.txt 2>${prefix}.log
 ```
 
 In the [output](primer.onRef.txt), each pair islabeled to be uniquely or multiply mapped and the amplicon information is provided.
 ```
-unique	G1_R	GTACAGACCCGCGACTATGA	0	+	6	73401719	G1_F	GTTGGAGCTGTGTCAAACGT	0	-	6	73402450	732
-unique	G2_R	TGTGTCTTTGTCAGCAGCTC	0	+	2	244412182	G2_F	TTGCTTGTTCCGGGAGATCT	0	-	2	244412620	439
-unique	G3_R	TGGTCACTGCTCAACAAGGT	0	+	9	65017072	G3_F	TGGATGGGTGGTATGTAGGG	0	-	9	65017745	674
-unique	G4_F	CAACAAGTGGGCTCTCATCG	0	+	8	2929359	G4_R	AGGCCATGTTCTGTTCTCGA	0	-	8	2930140	782
-multi2	G5_R	AGACACATTCGCCGTTTCTG	0	+	6	120703278	G5_F	ACAGCGTCACCAACTACATG	0	-	6	120703621	344
-multi2	G5_R	AGACACATTCGCCGTTTCTG	0	+	6	120724131	G5_F	ACAGCGTCACCAACTACATG	0	-	6	120724474	344
+unique	pf1	AATTTTCGATCGATGCCTTG	0	+	ctg_1	888	pr1	GGGAATCCTCCCCTTCAATA	0	-	ctg_1	1125	238
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	2485	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	2713	229
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	665	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	2713	2049
+multi3	pf2	CAGAGGATGGGAAGGCATAA	0	+	ctg_2	665	pr2	ATAGGGTCTTGCCATGTTGC	0	-	ctg_2	893	229
 ```
-Note that unique indicates the primer pair can uniquely amplify a target; multi2 indicates that two reigons are targeted.
+Note that unique indicates the primer pair can uniquely amplify a target; multi3 indicates that three reigons are targeted.
 
 
