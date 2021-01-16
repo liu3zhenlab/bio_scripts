@@ -3,7 +3,7 @@
 The script takes a fasta file of primers and aligns each to a reference genome for all alignments allowing a few mismatches. With all the alignments, pairs of primers mapped to a certain region of a reference sequence (typically a chromosome) are identified and output.
 
 ### Dependency
-(bowtie)[http://bowtie-bio.sourceforge.net]
+[bowtie](http://bowtie-bio.sourceforge.net)
 
 ### Usage
 Usage: primer.ePCR.pl [options]  
