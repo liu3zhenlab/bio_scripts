@@ -17,7 +17,7 @@ Options:
   -b str  bowtie parameters, refer to bowtie-bio.sourceforge.net (-p 4 -B 1 -n 1 -y -v 2 -a -l 10 -f --best --quiet --sam-nohead)  
 
 ### Example
-Here is an example that shows how to check primers in primer.fas on a reference genome.
+Here is an example that shows how to check primers in [primer.fas](primer.fas) on a reference genome.
 
 First, the reference genome needs to be indexed.
 ```
@@ -27,14 +27,14 @@ bowtie-build <path-to-reference_fasta> <path-to-bowtie-database>
 Second, run the script with the inputs and a primer fasta file and a Bowtie indexed database (e.g., <path-to-bowtie-database>) 
 ```
 #!/bin/bash
-pfas=primer.fas>
+pfas=primer.fas
 ref=<path-to-bowtie-database>
 prefix=primer.onRef
 perl primer.ePCR.pl -p $pfas -r $ref \
   1>${prefix}.txt 2>${prefix}.log
 ```
 
-In the output, each pair islabeled to be uniquely or multiply mapped and the amplicon information is provided.
+In the [output](primer.onRef.txt), each pair islabeled to be uniquely or multiply mapped and the amplicon information is provided.
 ```
 unique	G1_R	GTACAGACCCGCGACTATGA	0	+	6	73401719	G1_F	GTTGGAGCTGTGTCAAACGT	0	-	6	73402450	732
 unique	G2_R	TGTGTCTTTGTCAGCAGCTC	0	+	2	244412182	G2_F	TTGCTTGTTCCGGGAGATCT	0	-	2	244412620	439
