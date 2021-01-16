@@ -11,6 +11,7 @@ The script takes a fasta file of primers and aligns each to a reference genome f
 2. a fasta file of a reference
 
 ### Usage
+```
 Usage: primer.ePCR.pl [options]  
 Options:  
   -p str  primer fasta file; required  
@@ -20,6 +21,7 @@ Options:
   -t num  maximum mismatches, must <=4 (3)  
           the penalty is 2 for the first 3 bases at 3' end   
   -b str  bowtie parameters, refer to bowtie-bio.sourceforge.net (-p 4 -B 1 -n 1 -y -v 2 -a -l 10 -f --best --quiet --sam-nohead)  
+```
 
 ### Example
 Here is an example that shows how to check primers in [primer.fas](primer.fas) on a reference genome.
