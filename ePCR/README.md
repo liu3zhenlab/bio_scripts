@@ -46,6 +46,6 @@ unique	G6_R	AGCTTCACCATGCCAGAAAG	0	+	8	155440390	G6_F	GAATATCAAGTTTCGCAACC	0	-	8
 unique	G7_F	TCGACGACTTCTTCACTCCG	0	+	4	173819365	G7_R	CGCATGGTGTCTGATTCTCA	0	-	4	173819562	198
 unique	G9_F	CACCAACTTCGACATGAGCC	0	+	5	188936645	G9_R	CATGAGGAAAGAGCTGCCAC	0	-	5	188937110	466
 ```
-Note that multi2 indicates that two reigons are targeted.
+Note that unique indicates the primer pair can uniquely amplify a target; multi2 indicates that two reigons are targeted.
 
 
