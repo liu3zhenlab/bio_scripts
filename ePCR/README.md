@@ -7,7 +7,7 @@ The script takes a fasta file of primers and aligns each to a reference genome f
 [bowtie](http://bowtie-bio.sourceforge.net)
 
 ### Data requirement
-1. a primer fasta fiel, see example in [primer.fas](primer.fas)
+1. a primer fasta file, see example in [primer.fas](primer.fas)
 2. a fasta file of a reference
 
 ### Usage
