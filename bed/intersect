@@ -1,0 +1,103 @@
+#!/bin/bash
+# by Sanzhen Liu
+# 3/2020
+
+version=0.01;
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+usage() {
+	echo -e "${RED}Prerequirement${NC}: bedtools"
+	echo -e "${RED}Usage${NC}: $0 -c <chr_ID> -1 <bp_position> -e <bp_extension> [options]" >&2
+	echo -e "- use bedtools to search genomic contents in a specific region." >&2
+	echo "       -c: chromosome ID; required" >&2
+	echo "       -1: first chromosomal position in bp; required" >&2
+	echo "       -2: second chromosomal position in bp; optional" >&2
+	echo "       -i: input file (e.g, GFF, BED, BAM, etc); required" >&2
+	echo "       -e: extension length from both directions in bp (0)" >&2
+	echo "       -p: prefix (hit)" >&2
+	echo "       -m: modules to load if needed; multiple usages allowed" >&2
+	echo "       -v: version" >&2
+	echo "       -h: help information" >&2
+}
+
+while getopts ":c:1:2:e:i:p:m:vh" opt; do
+case $opt in
+	c) chr=$OPTARG;;
+	1) pos1=$OPTARG;;
+	2) pos2=$OPTARG;;
+	e) ext=$OPTARG;;
+	i) input=$OPTARG;;
+	p) prefix=$OPTARG;;
+	m) modules+=($OPTARG);;
+	v) echo $version; exit;;
+	h) usage; exit;;
+\?) echo "Invalid options: -$OPTARG." >&2; exit;;
+:) echo "Option -$OPTARG requires an argument" >&2; exit;;
+esac
+done
+
+### check required parameters
+if [ -z $chr ] || [ -z $pos1 ] || [ -z $input ]; then
+	echo -e "${RED}ERROR${NC}: Required parameters: -c; -1; -i." >&2
+	usage;
+	exit;
+fi
+
+if [ -z $pos2 ]; then
+	pos2=$pos1
+elif [ $pos2 -lt $pos1 ]; then
+	echo -e "${RED}ERROR${NC}: Position -1 must less than -2." >&2
+	exit;
+fi
+
+for module in "${modules[@]}"; do
+	module load $module
+	echo $module;
+done
+
+# default parameters:
+if [ -z $prefix ]; then
+	prefix=ng
+fi
+
+if [ -z $ext ]; then
+	ext=0;
+fi
+
+pos1=`expr $pos1 - $ext - 1`;
+pos2=`expr $pos2 + $ext`;
+pos1_1based=`expr $pos1 + 1`
+
+# output files:
+db=`echo $input | sed 's/.*\///g'`
+suffix=`echo $input | sed 's/.*\.//g'`
+output=${prefix}_${db}_${chr}_${pos1_1based}-${pos2}.$suffix
+tmpfile=$(mktemp /tmp/${prefix}_XXXXXX.bed)
+
+# further check coordinates:
+if [ $pos1 -lt 0 ]; then
+	pos1=0
+fi
+
+# search
+echo -e $chr"\t"$pos1"\t"$pos2 > $tmpfile
+add_option=""
+if [ $suffix == "bam" ]; then
+	add_option="-ubam"
+fi
+
+bedtools intersect -nonamecheck $add_option -a $input -b $tmpfile > $output
+if [ $suffix == "bam" ]; then
+	samOutput=${prefix}_${db}_${chr}_${pos1_1based}-${pos2}.sam
+	samtools view -h $output -o $samOutput
+	echo -e "${RED}Bottom search results${NC}"
+	tail $samOutput
+else
+	echo -e "${RED}Top search results${NC}"
+	head $output
+fi
+
+# cleanup
+rm "$tmpfile"
+
