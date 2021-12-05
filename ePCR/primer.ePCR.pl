@@ -4,7 +4,10 @@
 # primer.ePCR.pl
 # to evaluate targeting uniqueness of primers
 
-my $version = 0.2;
+my $version = 0.3.0;
+
+# update
+# 0.3.0: add the parameter -o
 
 use strict;
 use warnings;
@@ -13,8 +16,8 @@ use File::Temp qw/ tempfile tempdir /;
 
 ### options:
 my $bowtie_parameters = "-p 4 -B 1 -n 1 -y -v 2 -a -l 10 -f --best --quiet --sam-nohead";
-my %opts = (p=>"", r=>"", m=>50, s=>10000, t=>3, b=>$bowtie_parameters, h=>0);	
-getopts('p:r:m:s:t:b:h', \%opts);
+my %opts = (p=>"", r=>"", o=>"", m=>50, s=>10000, t=>3, b=>$bowtie_parameters, h=>0);	
+getopts('p:r:o:m:s:t:b:h', \%opts);
 
 if (!$opts{h} and ($opts{p} eq "" or $opts{r} eq "")) {
 	print STDERR "both -p and -r are requiied";
@@ -23,27 +26,32 @@ if (!$opts{h} and ($opts{p} eq "" or $opts{r} eq "")) {
 die(qq/
 Usage: primer.ePCR.pl [options]
 Options:
-  -p str  primer fasta file; required
-  -r str  bowtie index database; required
-  -m num  PCR min length ($opts{m})
-  -s num  PCR max length ($opts{s})
-  -t num  maximum mismatches, must <=4 ($opts{t})
-          the penalty is 2 for the first 3 bases at 3' end 
-  -b str  bowtie parameters, refer to bowtie-bio.sourceforge.net ($opts{b})
+  -p <file> primer fasta file; required
+  -r <path> bowtie index database; required
+            If no indexed files exist and the input is a fasta file, bowtie indexing will be performed. 
+  -o <file> 2-column separated by tab of pairs of primer names; optional
+            ePCR will only report results of primer pairs in the file
+  -m <num>  PCR min length ($opts{m})
+  -s <num>  PCR max length ($opts{s})
+  -t <num>  maximum mismatches, must <=4 ($opts{t})
+            the penalty is 2 for the first 3 bases at 3' end 
+  -b <str>  bowtie parameters, refer to bowtie-bio.sourceforge.net ($opts{b})
   \n/) if ($opts{h} || $opts{p} eq "" || $opts{r} eq "");
 
 
 my $primers = $opts{p};
 my $ref = $opts{r};
+my $ppairs_file = $opts{o} if ($opts{o} ne "");
 my $pcr_min_size = $opts{m};
 my $pcr_max_size = $opts{s};
 my $max_mismatch = $opts{t};
-
+$bowtie_parameters = $opts{b};
 
 ##################################
 ### check availability of bowtie
 ##################################
 &cmd_check("bowtie");
+&cmd_check("bowtie-build");
 
 ##################################
 ### parameters used:
@@ -59,6 +67,14 @@ print "# note the penalty 2 was used for the first 3 bases at 3' end\n";
 ##################################
 ### bowtie alignment
 ##################################
+# check bowtie indexed database
+my $bowtie_idx_filenum=`realpath $ref*ebwt | wc -l`;
+chomp $bowtie_idx_filenum;
+if ($bowtie_idx_filenum == 1 and $ref =~ /fa$|fas$|fasta$/) {
+	&runreport("No bowtie indexed files, indexing ...");
+	`bowtie-build $ref $ref`;
+} 
+
 # bowtie alignment
 my $aln = File::Temp->new(TEMPLATE => 'tempXXXXX', SUFFIX => '.aln.tmp');
 my $cmd = sprintf("%s %s %s %s > %s", "bowtie", $bowtie_parameters, $ref, $primers, $aln);
@@ -106,6 +122,21 @@ while (<IN>) {
 		my $aln_record = $entry."\t".$seq."\t".$mismatches;
 		push(@{$entry_record{$chr}{$ori}{$pos}}, $aln_record);
 	}
+}
+
+##################################
+# input primer pairs
+##################################
+my %input_primer_pair;
+if (defined $ppairs_file) {
+	open(PP, $ppairs_file) || die;
+	while (<PP>) {
+		chomp;
+		my ($pn1, $pn2) = split(/\t/, $_);
+		$input_primer_pair{$pn1.$pn2}++;
+		$input_primer_pair{$pn2.$pn1}++;
+	}
+	close PP;
 }
 
 ##################################
@@ -165,14 +196,16 @@ close IN;
 ##################################
 &runreport("Output primer pairs");
 # output searching result:
-foreach my $primer_name_comb (sort {$a cmp $b} keys %hitpairs) {
-	my @pair = @{$hitpairs{$primer_name_comb}};
-	if ($#pair < 1) { ### unique hit
-		print "unique\t$pair[0]\n";
-	} else {
-		my $hit_num = $#pair + 1;
-		for (my $i=0; $i<$hit_num; $i++) {
-			print "multi$hit_num\t$pair[$i]\n";
+foreach my $primer_name_comb (sort {$a cmp $b} keys %hitpairs) {	
+	if (!%input_primer_pair or $input_primer_pair{$primer_name_comb}) {
+		my @pair = @{$hitpairs{$primer_name_comb}};
+		if ($#pair < 1) { ### unique hit
+			print "unique\t$pair[0]\n";
+		} else {
+			my $hit_num = $#pair + 1;
+			for (my $i=0; $i<$hit_num; $i++) {
+				print "multi$hit_num\t$pair[$i]\n";
+			}
 		}
 	}
 }

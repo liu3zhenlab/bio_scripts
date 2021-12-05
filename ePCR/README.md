@@ -16,6 +16,8 @@ Usage: primer.ePCR.pl [options]
 Options:  
   -p str  primer fasta file; required  
   -r str  bowtie index database; required  
+  -o <file> 2-column separated by tab of pairs of primer names; optional
+          ePCR will only report results of primer pairs in the file
   -m num  PCR min length (50)  
   -s num  PCR max length (10000)  
   -t num  maximum mismatches, must <=4 (3)  
