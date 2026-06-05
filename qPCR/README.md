@@ -32,7 +32,8 @@ The input qRT-PCR data should be provided as a tab-delimited text file or CSV fi
 6. Perform statistical analysis and generate plots.
 
 ## Requirements
-R packages:
-dplyr
-tidyr
-multcompView 
+R packages: dplyr, tidyr, multcompView 
+
+## Contact
+Sanzhen Liu (liu3zhen@ksu.edu)
+
