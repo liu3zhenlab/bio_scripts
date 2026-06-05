@@ -85,7 +85,7 @@ df$Cq[is.na(df$Cq)] <- sample(36:40, sum(is.na(df$Cq)), replace=T) # NA to rando
 ## Average technical replicates
 ############################################################
 mean_ct <- df %>%
-  group_by(Experiment, Sample, Treatment, Incubation, Gene) %>%
+  group_by(Experiment, Sample, Treatment, Gene) %>%
   summarise(
     mean_Cq = mean(Cq),
     sd_Cq   = sd(Cq),
@@ -103,7 +103,6 @@ wide_ct <- mean_ct %>%
   select(Experiment,
          Sample,
          Treatment,
-         Incubation,
          Gene,
          mean_Cq) %>%
   pivot_wider(
