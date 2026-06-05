@@ -11,7 +11,6 @@ The input qRT-PCR data should be provided as a tab-delimited text file or CSV fi
 | Experiment | Experiment identifier |
 | Sample | Biological sample name |
 | Treatment | Treatment condition |
-| Incubation | Incubation time or condition |
 | Gene | Gene name |
 | Cq | Quantification cycle (Cq) value |
 
