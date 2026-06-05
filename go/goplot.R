@@ -27,90 +27,86 @@
 #' @author Sanzhen Liu (liu3zhen@gmail.com)
 goplot <- function(go.out,
                    order.by = c("pvals", "num", "enrich"),
-				   go.obs.num.col = "numDEInGO",
-				   go.exp.num.col = "numInGO",
-				   bar.obs.color = "cornflowerblue",
+                   go.obs.num.col = "numDEInGO",
+                   go.exp.num.col = "numInGO",
+                   bar.obs.color = "cornflowerblue",
                    bar.exp.color = rgb(0.9, 0.9, 0.9, 0.5),
                    term.col = "Term", term.cex = 0.75, term.space = 18,
-				   pval.col = "pvalue", pval.cutoff = 0.01,
-				   add.pval = TRUE, pval.cex = 0.8,
-				   enrich.col = NULL, enrich.cutoff = 1.5,
-				   min.gene.counts = 2, axis.cex = 0.8,
-				   tick.num = 10, xlab.cex = 0.8,
-				   main.space = 1,
-				   outsave = F, outfile,
-				   pdf.width = 6, pdf.height = 6, ...) {
-### 2/10/2016
-### updated 5/8/2019
-### updated 6/19/2020
-  if (outsave) {
-    pdf(outfile, width=pdf.width, height=pdf.height)
-  }
-  
+                   pval.col = "pvalue", pval.cutoff = 0.01,
+                   add.pval = TRUE, pval.cex = 0.8,
+                   enrich.col = NULL, enrich.cutoff = 1.5,
+                   min.gene.counts = 2, axis.cex = 0.8,
+                   tick.num = 10, xlab.cex = 0.8,
+                   main.space = 1,
+                   outsave = F, outfile,
+                   pdf.width = 6, pdf.height = 6, ...) {
+  ### 2/10/2016
+  ### updated 5/8/2019
+  ### updated 6/19/2020
   # pval filter
   if (!is.null(pval.col)) {
     sigresult <- go.out[go.out[, pval.col] < pval.cutoff, ]
   } else {
-  	sigresult <- go.out
+    sigresult <- go.out
   }
-
+  
   # enrich filter
   if (!is.null(enrich.col)) {
-  	sigresult <- sigresult[sigresult[, enrich.col] > enrich.cutoff, ]
+    sigresult <- sigresult[sigresult[, enrich.col] > enrich.cutoff, ]
   }
-
+  
   # gene number filter
   if (!is.null(min.gene.counts)) {
-  	sigresult <- sigresult[sigresult[, go.obs.num.col] >= min.gene.counts, ]
+    sigresult <- sigresult[sigresult[, go.obs.num.col] >= min.gene.counts, ]
   }
-
+  
   # plotting
   if (nrow(sigresult) > 0) {
     if (outsave) {
       pdf(outfile, width=pdf.width, height=pdf.height)
-	}
+    }
     
-	# order GO terms
-	if (length(order.by) == 1) {
-		if (order.by == "pvals" & !is.null(pval.col)) {
-			sigresult <- sigresult[order(sigresult[, pval.col], decreasing = T), ]
-		} else {
-			if (order.by == "enrich" & !is.null(enrich.col)) {
-				sigresult <- sigresult[order(sigresult[, enrich.col]), ] 
-			} else {
-				if (order.by == "num" & !is.null(go.obs.num.col)) {
-					sigresult <- sigresult[order(sigresult[, go.obs.num.col]), ]
-				} else {
-					cat("Only three choices for order.by: pvals, num, enrich")
-				}
-			}
-		}
-	}
-
+    # order GO terms
+    if (length(order.by) == 1) {
+      if (order.by == "pvals" & !is.null(pval.col)) {
+        sigresult <- sigresult[order(sigresult[, pval.col], decreasing = T), ]
+      } else {
+        if (order.by == "enrich" & !is.null(enrich.col)) {
+          sigresult <- sigresult[order(sigresult[, enrich.col]), ] 
+        } else {
+          if (order.by == "num" & !is.null(go.obs.num.col)) {
+            sigresult <- sigresult[order(sigresult[, go.obs.num.col]), ]
+          } else {
+            cat("Only three choices for order.by: pvals, num, enrich")
+          }
+        }
+      }
+    }
+    
     # plot
     plotdata <- sigresult[, c(go.obs.num.col, go.exp.num.col, pval.col)]
     plotnames <- as.character(sigresult[, term.col])
-	plotpval <- formatC(plotdata[, 3], format = "e", digits = 0)
-
+    plotpval <- formatC(plotdata[, 3], format = "e", digits = 0)
+    
     plotdata <- as.matrix(plotdata[!is.na(plotnames), ])  ### remove NA
     plotnames <- plotnames[!is.na(plotnames)]
-
-	par(mar=c(3, term.space, main.space , 2))
+    
+    par(mar=c(3, term.space, main.space , 2))
     # obs
-	barpos <- barplot(plotdata[, 1], names.arg = "", horiz=T, col=bar.obs.color,
-            axes=F, xlab="", ...)
+    barpos <- barplot(plotdata[, 1], names.arg = "", horiz=T, col=bar.obs.color,
+                      axes=F, xlab="", ...)
     # exp
-	barplot(plotdata[, 2], names.arg=plotnames, horiz=T, las=2, col=bar.exp.color,
+    barplot(plotdata[, 2], names.arg=plotnames, horiz=T, las=2, col=bar.exp.color,
             axes=F, cex.names=term.cex, xlab="", add = T)
- 	
-	if (add.pval) {
- 		text(plotdata[, 2], barpos, plotpval, pos=4, cex=pval.cex) 
+    
+    if (add.pval) {
+      text(plotdata[, 2], barpos, plotpval, pos=4, cex=pval.cex) 
     }
-	abline(v=0)
-	par(mgp = c(3, 0.5, 0))
-	xmax <- ceiling(max(plotdata) / tick.num) * tick.num
-	axis(side=1, at =seq(0, xmax, xmax / tick.num), cex.axis = axis.cex)
-	mtext(text = "Number of genes", line = 1.5, side = 1, cex = xlab.cex)
+    abline(v=0)
+    par(mgp = c(3, 0.5, 0))
+    xmax <- ceiling(max(plotdata) / tick.num) * tick.num
+    axis(side=1, at =seq(0, xmax, xmax / tick.num), cex.axis = axis.cex)
+    mtext(text = "Number of genes", line = 1.5, side = 1, cex = xlab.cex)
     if (outsave) { dev.off() }
   }
 }
