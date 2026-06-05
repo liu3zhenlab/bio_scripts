@@ -25,7 +25,6 @@ The input qRT-PCR data should be provided as a tab-delimited text file or CSV fi
 | Exp1 | OE | Heat | 24 h | oleosin1 | 24.6 |
 
 ## Analysis Workflow
-
 1. Import qRT-PCR data.
 2. Calculate mean Cq values for technical replicates.
 3. Calculate ΔCt using the housekeeping gene.
@@ -34,5 +33,7 @@ The input qRT-PCR data should be provided as a tab-delimited text file or CSV fi
 6. Perform statistical analysis and generate plots.
 
 ## Requirements
-
-r library(dplyr) library(tidyr) library(ggplot2) library(multcompView) 
+R packages:
+dplyr
+tidyr
+multcompView 
