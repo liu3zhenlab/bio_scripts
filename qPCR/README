@@ -1,5 +1,5 @@
-# qRT-PCR analysis
+#qRT-PCR analysis
 
-### qRT-PCR data
-### header
+###qRT-PCR data
+###header
 Experiment | Sample | Treatment | Incubation | Gene | Cq
