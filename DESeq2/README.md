@@ -6,7 +6,7 @@ R script to perform a single-factor comparison to identify differential expressi
 source("https://raw.githubusercontent.com/liu3zhenlab/bio_scripts/master/DESeq2/DESeq2.single.trt.R")
 ```
 
-#### Second, generate an example data under null hypothesis
+#### Second, generate an example data under the null hypothesis
 ```
 indata <- data.frame(Gene=paste("g", 1:5000, sep=""),
 	Group1_rep1=rpois(n=5000, lambda=50),
@@ -18,7 +18,7 @@ indata <- data.frame(Gene=paste("g", 1:5000, sep=""),
 	Group2_rep3=rpois(n=5000, lambda=50))
 ```
 
-#### Third, perform pair-wise comparison
+#### Third, perform a comparison
 ```
 comparison <- c("Group1", "Group2")
 group1 <- comparison[1]
