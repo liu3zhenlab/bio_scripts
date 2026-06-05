@@ -17,12 +17,12 @@ The input qRT-PCR data should be provided as a tab-delimited text file or CSV fi
 
 ### Example
 
-| Experiment | Sample | Treatment | Incubation | Gene | Cq |
-|------------|--------|-----------|------------|------|----|
-| Exp1 | WT | Control | 0 h | ubq | 21.5 |
-| Exp1 | WT | Control | 0 h | oleosin1 | 27.3 |
-| Exp1 | OE | Heat | 24 h | ubq | 20.8 |
-| Exp1 | OE | Heat | 24 h | oleosin1 | 24.6 |
+| Experiment | Sample | Treatment | Gene | Cq |
+|------------|--------|-----------|------|----|
+| Exp1 | WT | Control | ubq | 21.5 |
+| Exp1 | WT | Control | ole | 27.3 |
+| Exp1 | OE | Heat | ubq | 20.8 |
+| Exp1 | OE | Heat | ole | 24.6 |
 
 ## Analysis Workflow
 1. Import qRT-PCR data.
