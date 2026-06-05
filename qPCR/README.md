@@ -1,6 +1,6 @@
 # qRT-PCR Analysis
 
-This repository contains scripts for qRT-PCR data analysis using the 2^-ΔΔCt method.
+This repository contains an R script for qRT-PCR data analysis using the 2^-ΔΔCt method.
 
 ## Input Data
 
